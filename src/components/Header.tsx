@@ -26,21 +26,31 @@ export default function Header() {
           </h1>
 
           {/* Desktop Navigation */}
-          <nav className="hidden xl:flex gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 ${
-                  location.pathname === link.to
-                    ? "bg-gray-900 text-white shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {/* ... Các đoạn code import giữ nguyên ... */}
+
+{/* Tìm đến đoạn Menu Navigation và sửa lại như sau: */}
+<nav className="hidden md:flex space-x-2">
+  <Link to="/" className="px-4 py-2 rounded-full text-gray-600 hover:bg-gray-100 font-medium">
+    Kết quả
+  </Link>
+  
+  {/* 1. Trang Thống kê (Chỉ chứa bảng lịch sử) */}
+  <Link to="/history" className="px-4 py-2 rounded-full text-gray-600 hover:bg-gray-100 font-medium">
+    Thống kê
+  </Link>
+
+  {/* 2. Trang Biểu đồ (MỚI THÊM VÀO) */}
+  <Link to="/chart" className="px-4 py-2 rounded-full text-gray-600 hover:bg-gray-100 font-medium">
+    Biểu đồ
+  </Link>
+
+  <Link to="/prediction" className="px-4 py-2 rounded-full text-gray-600 hover:bg-gray-100 font-medium">
+    Dự đoán
+  </Link>
+  <Link to="/about" className="px-4 py-2 rounded-full text-gray-600 hover:bg-gray-100 font-medium">
+    Giới thiệu & Hướng dẫn
+  </Link>
+</nav>
 
           {/* Mobile Menu Button */}
           <button
