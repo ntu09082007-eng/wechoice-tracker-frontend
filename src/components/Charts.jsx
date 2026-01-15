@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
   LineChart,
   Line,
@@ -29,6 +29,9 @@ export default function Charts({ apiPayload }) {
   const [zoomRight, setZoomRight] = useState(null);
   const [refAreaLeft, setRefAreaLeft] = useState(null);
   const [refAreaRight, setRefAreaRight] = useState(null);
+
+  // Tạo Ref để tham chiếu đến thẻ div chứa biểu đồ
+  const chartContainerRef = useRef(null);
 
   // 1. Xử lý dữ liệu đầu vào
   useEffect(() => {
@@ -75,49 +78,70 @@ export default function Charts({ apiPayload }) {
     );
   }, [data]);
 
-  // Logic Zoom bằng lăn chuột
-  const handleWheel = (e) => {
-    if (!data || data.length === 0) return;
+  // --- LOGIC CHẶN CUỘN TRANG & ZOOM ---
+  useEffect(() => {
+    const container = chartContainerRef.current;
+    if (!container) return;
 
-    let startIndex = 0;
-    let endIndex = data.length - 1;
+    const handleWheel = (e) => {
+      // QUAN TRỌNG: Dòng này chặn trang web bị cuộn khi lăn chuột
+      e.preventDefault();
 
-    if (zoomLeft) {
-      const idx = data.findIndex((d) => d.name === zoomLeft);
-      if (idx !== -1) startIndex = idx;
-    }
-    if (zoomRight) {
-      const idx = data.findIndex((d) => d.name === zoomRight);
-      if (idx !== -1) endIndex = idx;
-    }
+      if (!data || data.length === 0) return;
 
-    const currentRange = endIndex - startIndex;
-    const zoomFactor = Math.max(1, Math.round(currentRange * 0.05)); 
+      let startIndex = 0;
+      let endIndex = data.length - 1;
 
-    if (e.deltaY < 0) {
-      // ZOOM IN
-      if (currentRange > 2) {
-        startIndex = startIndex + zoomFactor;
-        endIndex = endIndex - zoomFactor;
+      // Tìm vị trí zoom hiện tại
+      if (zoomLeft) {
+        const idx = data.findIndex((d) => d.name === zoomLeft);
+        if (idx !== -1) startIndex = idx;
       }
-    } else {
-      // ZOOM OUT
-      startIndex = startIndex - zoomFactor;
-      endIndex = endIndex + zoomFactor;
-    }
+      if (zoomRight) {
+        const idx = data.findIndex((d) => d.name === zoomRight);
+        if (idx !== -1) endIndex = idx;
+      }
 
-    if (startIndex < 0) startIndex = 0;
-    if (endIndex >= data.length) endIndex = data.length - 1;
-    if (startIndex >= endIndex) {
-        startIndex = 0; 
-        endIndex = data.length - 1; 
-    }
+      // Tính tốc độ zoom
+      const currentRange = endIndex - startIndex;
+      const zoomFactor = Math.max(1, Math.round(currentRange * 0.05)); 
 
-    setZoomLeft(data[startIndex].name);
-    setZoomRight(data[endIndex].name);
-  };
+      if (e.deltaY < 0) {
+        // ZOOM IN (Lăn lên)
+        if (currentRange > 2) {
+          startIndex = startIndex + zoomFactor;
+          endIndex = endIndex - zoomFactor;
+        }
+      } else {
+        // ZOOM OUT (Lăn xuống)
+        startIndex = startIndex - zoomFactor;
+        endIndex = endIndex + zoomFactor;
+      }
 
-  // Logic Zoom bằng chuột (Click & Drag)
+      // Kiểm tra biên
+      if (startIndex < 0) startIndex = 0;
+      if (endIndex >= data.length) endIndex = data.length - 1;
+      if (startIndex >= endIndex) {
+          startIndex = 0; 
+          endIndex = data.length - 1; 
+      }
+
+      // Cập nhật state zoom
+      setZoomLeft(data[startIndex].name);
+      setZoomRight(data[endIndex].name);
+    };
+
+    // Gán sự kiện với passive: false để cho phép e.preventDefault() hoạt động
+    container.addEventListener("wheel", handleWheel, { passive: false });
+
+    // Cleanup khi component unmount
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+    };
+  }, [data, zoomLeft, zoomRight]); // Chạy lại khi data hoặc zoom thay đổi
+
+
+  // Logic Zoom bằng chuột (Click & Drag - giữ lại)
   const zoom = () => {
     let left = refAreaLeft;
     let right = refAreaRight;
@@ -235,7 +259,6 @@ export default function Charts({ apiPayload }) {
                           <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                               <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
                               
-                              {/* NÚT CHỌN TẤT CẢ - Đã bỏ click đen */}
                               <button 
                                   onClick={handleSelectAll} 
                                   className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
@@ -281,10 +304,10 @@ export default function Charts({ apiPayload }) {
           </div>
         </div>
 
-        {/* --- KHU VỰC BIỂU ĐỒ (CÓ SỰ KIỆN onWheel) --- */}
+        {/* --- KHU VỰC BIỂU ĐỒ (Được gắn Ref để xử lý Scroll) --- */}
         <div 
+            ref={chartContainerRef} // Gắn Ref vào đây
             className="h-[450px] w-full bg-white select-none"
-            onWheel={handleWheel}
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
