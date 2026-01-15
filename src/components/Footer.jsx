@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -12,7 +11,7 @@ export default function Footer() {
           <div className="md:w-1/2 space-y-3">
             <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
             
-            {/* Chữ đậm (font-bold) & Màu đen (text-gray-900) */}
+            {/* Chữ đậm (font-bold) & Màu đen (text-gray-900) - NHƯ CŨ */}
             <p className="text-gray-900 text-sm leading-relaxed font-bold">
               Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
               <br />
@@ -48,22 +47,13 @@ export default function Footer() {
           <div className="text-sm text-gray-900 font-bold space-y-1">
             <p>Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
             <p>
-              Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
-              <br/>Tiếp tục dựa trên source code của 
-              <a 
-                href="https://www.threads.com/@_thetreee_" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="hover:underline hover:text-gray-600 transition-colors"
-              >
-                @_thetreee_
-              </a>
+              Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. Tiếp tục dựa trên source code của <span className="font-extrabold text-black">@_thetreee_</span>
             </p>
           </div>
 
           {/* Chữ ký */}
-          <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive' }}>
-            Thank you dancers!
+          <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: "'Dancing Script', cursive" }}>
+            Thank you dancer!
           </div>
         </div>
       </div>
