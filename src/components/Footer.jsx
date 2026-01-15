@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="md:w-1/2 space-y-3">
             <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
             
-            {/* 👇 KHÔI PHỤC: Chữ đậm (font-bold) & Màu đen (text-gray-900) */}
+            {/* Chữ đậm (font-bold) & Màu đen (text-gray-900) */}
             <p className="text-gray-900 text-sm leading-relaxed font-bold">
               Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
               <br />
@@ -43,7 +43,7 @@ export default function Footer() {
         {/* --- PHẦN DƯỚI --- */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-center md:text-left">
           
-          {/* 👇 KHÔI PHỤC: Copyright & Credits - Chữ đậm & Màu đen */}
+ {/* 👇 KHÔI PHỤC: Copyright & Credits - Chữ đậm & Màu đen */}
             <div className="text-sm text-gray-900 font-bold space-y-1">
             <p>Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
               <p>Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
@@ -56,7 +56,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Chữ ký (Giữ nguyên font viết tay) */}
+          {/* Chữ ký */}
           <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive' }}>
             Thank you dancers!
           </div>
