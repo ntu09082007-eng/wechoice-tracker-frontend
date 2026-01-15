@@ -22,10 +22,10 @@ export default function Footer() {
           <div className="xl:col-span-2">
             <h3 className="text-black text-xl font-bold mb-1">Thông tin</h3>
             <p className="text-sm leading-relaxed">
-              Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ mỗi{" "}
+              Hệ thống tự động cập nhật trực tiếp dữ liệu mỗi{" "}
               {/* SỬA LỖI: Dùng &nbsp; để hàn dính số 10 và chữ giây */}
               <b className="whitespace-nowrap">10&nbsp;giây</b>.
-              <br />
+              <br/>
               Đồng thời ghi nhận lại mỗi <b className="whitespace-nowrap">10&nbsp;phút</b> để phân tích và dự đoán.
             </p>
           </div>
@@ -41,7 +41,8 @@ export default function Footer() {
                 Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.
               </p>
               <p className="text-gray-800 text-sm mt-0.5 font-medium">
-                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. Tiếp tục dựa trên source code của Nguyễn Đình Kiên -
+                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
+                <br/>Tiếp tục dựa trên source code của
               <h3 className="text-gray-800 text-sm font-extrabold hover:underline">
               <a href="https://www.threads.com/@_thetreee_" target="_blank" rel="noreferrer"> @_thetreee_</a>
               </h3>
