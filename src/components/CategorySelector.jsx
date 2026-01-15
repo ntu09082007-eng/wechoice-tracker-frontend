@@ -9,7 +9,7 @@ export default function CategorySelector({ onSelect }) {
       onChange={(e) => onSelect(e.target.value)}
     >
       <option value="" className="text-gray-500">
-        Chọn hạng mục để phân tích
+        Chọn hạng mục
       </option>
       {categories.map((c) => (
         <option key={c.id} value={c.id} className="py-2">
