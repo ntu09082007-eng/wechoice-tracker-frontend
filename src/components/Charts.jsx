@@ -30,7 +30,7 @@ export default function Charts({ apiPayload }) {
   const [refAreaLeft, setRefAreaLeft] = useState(null);
   const [refAreaRight, setRefAreaRight] = useState(null);
 
-  // Tạo Ref để tham chiếu đến thẻ div chứa biểu đồ
+  // Tạo Ref để tham chiếu đến thẻ div chứa biểu đồ (Dùng để chặn cuộn trang)
   const chartContainerRef = useRef(null);
 
   // 1. Xử lý dữ liệu đầu vào
@@ -78,13 +78,13 @@ export default function Charts({ apiPayload }) {
     );
   }, [data]);
 
-  // --- LOGIC CHẶN CUỘN TRANG & ZOOM ---
+  // --- LOGIC CHẶN CUỘN TRANG & ZOOM BẰNG LĂN CHUỘT ---
   useEffect(() => {
     const container = chartContainerRef.current;
     if (!container) return;
 
     const handleWheel = (e) => {
-      // QUAN TRỌNG: Dòng này chặn trang web bị cuộn khi lăn chuột
+      // Chặn trang web bị cuộn khi lăn chuột trong biểu đồ
       e.preventDefault();
 
       if (!data || data.length === 0) return;
@@ -131,14 +131,13 @@ export default function Charts({ apiPayload }) {
       setZoomRight(data[endIndex].name);
     };
 
-    // Gán sự kiện với passive: false để cho phép e.preventDefault() hoạt động
+    // Gán sự kiện với passive: false
     container.addEventListener("wheel", handleWheel, { passive: false });
 
-    // Cleanup khi component unmount
     return () => {
       container.removeEventListener("wheel", handleWheel);
     };
-  }, [data, zoomLeft, zoomRight]); // Chạy lại khi data hoặc zoom thay đổi
+  }, [data, zoomLeft, zoomRight]); 
 
 
   // Logic Zoom bằng chuột (Click & Drag - giữ lại)
@@ -214,11 +213,13 @@ export default function Charts({ apiPayload }) {
         {/* --- THANH ĐIỀU KHIỂN --- */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           
-          {/* Nhóm nút Trái: Tổng phiếu / Tốc độ */}
+          {/* 👇 UPDATE TẠI ĐÂY: Nhóm nút Trái: Tổng phiếu / Tốc độ 
+              Mình đã thêm class md:w-60 để nó dài ra (khoảng 240px)
+          */}
           <div className="flex gap-2 w-full md:w-auto">
             <button
               onClick={() => setChartType("total")}
-              className={`flex-1 md:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 md:w-60 px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 chartType === "total"
                   ? "bg-[#1a1b26] text-white shadow-lg"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -228,7 +229,7 @@ export default function Charts({ apiPayload }) {
             </button>
             <button
               onClick={() => setChartType("speed")}
-              className={`flex-1 md:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 md:w-60 px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 chartType === "speed"
                   ? "bg-[#1a1b26] text-white shadow-lg"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
