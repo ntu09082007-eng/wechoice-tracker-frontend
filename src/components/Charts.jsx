@@ -11,7 +11,7 @@ import {
   ReferenceArea,
 } from "recharts";
 
-// Bảng màu cũ của bạn
+// Bảng màu
 const COLORS = [
   "#e63946", "#457b9d", "#1d3557", "#2a9d8f", "#e9c46a", 
   "#f4a261", "#e76f51", "#8338ec", "#fb5607", "#3a86ff"
@@ -125,17 +125,17 @@ export default function Charts({ apiPayload }) {
   return (
     <div className="w-full">
       
-      {/* --- THANH ĐIỀU KHIỂN (STYLE CŨ) --- */}
+      {/* --- THANH ĐIỀU KHIỂN --- */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         
-        {/* Nhóm nút Trái: Tổng phiếu / Tốc độ (Tách rời như cũ) */}
+        {/* Nhóm nút Trái: Tổng phiếu / Tốc độ */}
         <div className="flex gap-2 w-full md:w-auto">
           <button
             onClick={() => setChartType("total")}
             className={`flex-1 md:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
               chartType === "total"
-                ? "bg-[#1a1b26] text-white shadow-lg" // Active: Đen đậm
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200" // Inactive: Xám nhạt
+                ? "bg-[#1a1b26] text-white shadow-lg"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
             Tổng phiếu
@@ -155,7 +155,7 @@ export default function Charts({ apiPayload }) {
         {/* Nhóm nút Phải: Lọc + Zoom */}
         <div className="flex gap-2 w-full md:w-auto relative">
             
-            {/* NÚT LỌC (Style xám đơn giản giống nút Zoom) */}
+            {/* NÚT TUỲ CHỌN ỨNG VIÊN */}
             <div className="relative">
                 <button
                     onClick={() => setShowFilter(!showFilter)}
@@ -172,9 +172,18 @@ export default function Charts({ apiPayload }) {
                     <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4 animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                             <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
-                            <button onClick={handleSelectAll} className="text-xs text-blue-600 hover:underline font-bold">
+                            
+                            {/* 👇 NÚT NÀY ĐÃ ĐƯỢC SỬA STYLE FLASH 👇 */}
+                            <button 
+                                onClick={handleSelectAll} 
+                                className="px-3 py-1 rounded-full text-xs font-bold transition-all duration-200 
+                                           bg-white text-gray-600 border border-gray-200
+                                           hover:bg-gray-400 hover:text-white 
+                                           active:bg-black active:text-white"
+                            >
                                 {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
                             </button>
+                            
                         </div>
                         <div className="space-y-1 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
                             {candidateNames.map((name, index) => (
@@ -201,7 +210,7 @@ export default function Charts({ apiPayload }) {
                 )}
             </div>
             
-            {/* NÚT RESET ZOOM (Style cũ) */}
+            {/* NÚT RESET ZOOM */}
             <button
                 onClick={resetZoom}
                 className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
@@ -213,7 +222,6 @@ export default function Charts({ apiPayload }) {
       </div>
 
       {/* --- KHU VỰC BIỂU ĐỒ --- */}
-      {/* Đã bỏ border xám, giữ nền trắng sạch sẽ */}
       <div className="h-[450px] w-full bg-white select-none">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
