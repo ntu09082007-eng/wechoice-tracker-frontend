@@ -54,4 +54,11 @@ export default function Footer() {
           </div>
 
           {/* Chữ ký */}
-          <div className="font-cursive text-2xl text-gray
+          <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive' }}>
+            Thank you dancer!
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
