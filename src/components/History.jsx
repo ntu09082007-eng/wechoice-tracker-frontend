@@ -129,7 +129,7 @@ export default function History({ apiPayload }) {
               onChange={(e) => setFilterByRange(Number(e.target.value))}
               className="flex-1 min-w-[150px] px-4 py-2 bg-white border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-gray-300 text-gray-700 font-medium"
             >
-              <option value={0}>Tất cả (10 phút)</option>
+              <option value={0}>10 phút</option>
               <option value={30}>30 phút</option>
               <option value={60}>1 tiếng</option>
               <option value={120}>2 tiếng</option>
