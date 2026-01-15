@@ -41,12 +41,9 @@ export default function Footer() {
                 Copyright © by WeChoice Awards & công ty cổ phần VC CORP.
               </p>
               <p className="text-gray-800 text-sm mt-0.5 font-medium">
-                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN.
-              </p>
-              <p className="text-gray-800 text-sm mt-0.5 font-medium">
-                Phát triển tiếp tục dựa trên source của Nguyễn Đình Kiên - 
+                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. Tiếp tục dựa trên source code của Nguyễn Đình Kiên -
               <h3 className="text-gray-800 text-sm font-extrabold hover:underline">
-              <a href="https://www.threads.com/@_thetreee_" target="_blank" rel="noreferrer">@_thetreee_</a>
+              <a href="https://www.threads.com/@_thetreee_" target="_blank" rel="noreferrer"> @_thetreee_</a>
               </h3>
               </p>
             </div>
