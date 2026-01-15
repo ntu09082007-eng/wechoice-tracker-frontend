@@ -1,6 +1,3 @@
-/* eslint-disable */
-import React from 'react';
-
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-10 mt-auto border-t border-gray-200">
@@ -12,7 +9,7 @@ export default function Footer() {
           <div className="md:w-1/2 space-y-3">
             <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
             
-            {/* Style: Đậm & Đen (Như cũ) */}
+            {/* Style: Đậm & Đen */}
             <p className="text-gray-900 text-sm leading-relaxed font-bold">
               Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
               <br />
@@ -53,7 +50,7 @@ export default function Footer() {
           </div>
 
           {/* Chữ ký */}
-          <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: "'Dancing Script', cursive" }}>
+          <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive' }}>
             Thank you dancer!
           </div>
         </div>
