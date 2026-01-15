@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 export default function Footer() {
@@ -43,15 +44,19 @@ export default function Footer() {
         {/* --- PHẦN DƯỚI --- */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-center md:text-left">
           
- {/* 👇 KHÔI PHỤC: Copyright & Credits - Chữ đậm & Màu đen */}
-            <div className="text-sm text-gray-900 font-bold space-y-1">
+          {/* Copyright & Credits - Chữ đậm & Màu đen */}
+          <div className="text-sm text-gray-900 font-bold space-y-1">
             <p>Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
-              <p>Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
-              <br/>Dựa trên source code của
-              <br/><a href="https://www.threads.com/@_thetreee_" 
+            <p>
+              Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
+              <br/>Tiếp tục dựa trên source code của 
+              <a 
+                href="https://www.threads.com/@_thetreee_" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="hover:underline hover:text-gray-600 transition-colors"> @_thetreee_
+                className="hover:underline hover:text-gray-600 transition-colors"
+              >
+                @_thetreee_
               </a>
             </p>
           </div>
