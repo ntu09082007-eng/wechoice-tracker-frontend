@@ -3,7 +3,7 @@ export default function AboutPage() {
     <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
       <div className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Về FChoice 2025 Tracker
+          WeChoice 2025 Tracker
         </h1>
       </div>
 
@@ -14,14 +14,14 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-gray-800">Giới thiệu</h2>
           </div>
           <p className="text-gray-700 leading-relaxed mb-2">
-            FChoice 2025 Tracker là công cụ theo dõi và phân tích kết quả bình
-            chọn của FChoice 2025 theo thời gian thực. Đồng thời cung cấp các
+            WeChoice 2025 Tracker là công cụ theo dõi và phân tích kết quả bình
+            chọn của giải thưởng WeChoice Awards 2025 theo thời gian thực. Đồng thời cung cấp các
             tính năng thống kê, dự đoán và cập nhật trực tiếp giúp bạn nắm bắt
             một cách trực quan về xu hướng bình chọn.
           </p>
           <h3 className="text-lg font-extrabold hover:underline">
-            <a href="https://fchoice.vn/">
-              Truy cập trang web giải thưởng: <b>fchoice.vn</b>
+            <a href="https://wechoice.vn/">
+              Truy cập trang web giải thưởng: <b>wechoice.vn</b>
             </a>
           </h3>
         </div>
@@ -54,21 +54,7 @@ export default function AboutPage() {
           </ul>
         </div>
       </div>
-
-      <div className="space-y-6">
-        {/* Source code */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">
-              Mã nguồn của dự án{" "}
-            </h2>
-          </div>
-          <p className="text-gray-700 leading-relaxed mb-2">
-            Mã nguồn dự án được sẽ công khai sau khi kết thúc bình chọn.
-          </p>
-        </div>
-      </div>
-
+      
       <div className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-12">
           Hướng dẫn sử dụng
@@ -92,13 +78,13 @@ export default function AboutPage() {
               <strong>Cách hoạt động:</strong>
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Dữ liệu được cập nhật tự động mỗi 10 giây</li>
+              <li>Dữ liệu được cập nhật tự động 10 giây/1 lần</li>
               <li>
                 Hiển thị tổng số phiếu bình chọn của từng ứng viên theo từng
                 hạng mục, được sắp xếp theo thứ hạng.
               </li>
               <li>
-                Cột "Thay đổi" cho biết số phiếu tăng/giảm so với lần cập nhật
+                Cột "Kết quả" cho biết số phiếu tăng/giảm so với lần cập nhật
                 trước:
                 <ul className="list-circle list-inside ml-6 mt-1">
                   <li>
@@ -133,7 +119,7 @@ export default function AboutPage() {
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Chọn hạng mục muốn xem thống kê.</li>
               <li>
-                Hệ thống sẽ hiển thị Lịch sử bình chọn và Biểu đồ bình chọn.
+                Hệ thống sẽ hiển thị Lịch sử bình chọn
               </li>
             </ul>
             <p>
@@ -162,6 +148,26 @@ export default function AboutPage() {
               </li>
             </ul>
 
+           {/* Trang Biểu đồ */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-2xl font-bold text-gray-800">
+              Tính năng: Biểu đồ (Charts)
+            </h2>
+          </div>
+          <div className="space-y-3 text-gray-700">
+            <p>
+              <strong>Mục đích:</strong> Phân tích xu hướng bình chọn qua các
+              mốc thời gian.
+            </p>
+            <p>
+              <strong>Cách sử dụng:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Chọn hạng mục muốn xem thống kê.</li>
+              <li>
+                Hệ thống sẽ hiển thị Biểu đồ bình chọn
+              </li>
             <p>
               <strong>Biểu đồ bình chọn: </strong>
               Có 2 loại là Biểu đồ tổng số phiếu, hiển thị sự thay đổi tổng số
