@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
   LineChart,
   Line,
@@ -17,9 +17,8 @@ const COLORS = [
   "#f4a261", "#e76f51", "#8338ec", "#fb5607", "#3a86ff"
 ];
 
-// Sử dụng 'any' cho props để tránh lỗi kiểm tra kiểu dữ liệu nghiêm ngặt
+// Sử dụng 'any' để tránh lỗi TypeScript build
 export default function Charts({ apiPayload }: { apiPayload: any }) {
-  // Khai báo state với kiểu any[] để tránh lỗi
   const [data, setData] = useState<any[]>([]);
   const [chartType, setChartType] = useState<"total" | "speed">("total");
   
@@ -77,7 +76,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     );
   }, [data]);
 
-  // Logic Zoom
+  // --- LOGIC ZOOM CLICK & DRAG (CŨ) ---
   const zoom = () => {
     let left = refAreaLeft;
     let right = refAreaRight;
@@ -105,11 +104,73 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     setZoomRight(null);
   };
 
+  // --- LOGIC ZOOM BẰNG LĂN CHUỘT (MỚI) ---
+  const handleWheel = (e: React.WheelEvent) => {
+    // Ngăn cuộn trang khi đang zoom biểu đồ
+    // Lưu ý: React SyntheticEvent không luôn preventDefault được native scroll, 
+    // nhưng ta cứ đặt ở đây, user nên để chuột vào vùng biểu đồ.
+    
+    if (!data || data.length === 0) return;
+
+    // 1. Xác định vị trí hiện tại (Index)
+    let startIndex = 0;
+    let endIndex = data.length - 1;
+
+    // Nếu đang zoom, tìm index của zoomLeft/Right hiện tại
+    if (zoomLeft) {
+      const idx = data.findIndex(d => d.name === zoomLeft);
+      if (idx !== -1) startIndex = idx;
+    }
+    if (zoomRight) {
+      const idx = data.findIndex(d => d.name === zoomRight);
+      if (idx !== -1) endIndex = idx;
+    }
+
+    // 2. Tính toán tốc độ zoom (Zoom speed)
+    // Zoom 5% số lượng điểm dữ liệu hiện có mỗi lần lăn
+    const currentRange = endIndex - startIndex;
+    const zoomFactor = Math.max(1, Math.round(currentRange * 0.05)); 
+
+    // 3. Xác định hướng lăn chuột
+    // deltaY < 0 là lăn lên (Zoom In), deltaY > 0 là lăn xuống (Zoom Out)
+    if (e.deltaY < 0) {
+      // ZOOM IN: Thu hẹp khoảng cách
+      // Giới hạn không zoom quá sâu (để lại ít nhất 2 điểm)
+      if (currentRange > 2) {
+        startIndex = startIndex + zoomFactor;
+        endIndex = endIndex - zoomFactor;
+      }
+    } else {
+      // ZOOM OUT: Mở rộng khoảng cách
+      startIndex = startIndex - zoomFactor;
+      endIndex = endIndex + zoomFactor;
+    }
+
+    // 4. Kiểm tra biên (Boundaries)
+    if (startIndex < 0) startIndex = 0;
+    if (endIndex >= data.length) endIndex = data.length - 1;
+    if (startIndex >= endIndex) {
+        // Tránh lỗi start vượt quá end
+        startIndex = 0; 
+        endIndex = data.length - 1; 
+    }
+
+    // 5. Cập nhật State
+    setZoomLeft(data[startIndex].name);
+    setZoomRight(data[endIndex].name);
+  };
+
+  // Lọc dữ liệu hiển thị
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
-    return data.filter(
-      (d) => d.name.localeCompare(zoomLeft) >= 0 && d.name.localeCompare(zoomRight) <= 0
-    );
+    // Tìm index để slice cho chính xác và nhanh hơn filter string
+    const startIdx = data.findIndex(d => d.name === zoomLeft);
+    const endIdx = data.findIndex(d => d.name === zoomRight);
+    
+    if (startIdx === -1 || endIdx === -1) return data;
+    
+    // Slice data để hiển thị vùng zoom
+    return data.slice(Math.min(startIdx, endIdx), Math.max(startIdx, endIdx) + 1);
   }, [data, zoomLeft, zoomRight]);
 
   const toggleCandidate = (name: string) => {
@@ -147,7 +208,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
         {/* --- THANH ĐIỀU KHIỂN --- */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           
-          {/* Nhóm nút Trái: Tổng phiếu / Tốc độ */}
+          {/* Nhóm nút Trái */}
           <div className="flex gap-2 w-full md:w-auto">
             <button
               onClick={() => setChartType("total")}
@@ -171,7 +232,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
             </button>
           </div>
 
-          {/* Nhóm nút Phải: Tuỳ chọn + Zoom */}
+          {/* Nhóm nút Phải */}
           <div className="flex gap-2 w-full md:w-auto relative">
               
               {/* NÚT TUỲ CHỌN ỨNG VIÊN */}
@@ -238,12 +299,14 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
           </div>
         </div>
 
-        {/* --- KHU VỰC BIỂU ĐỒ --- */}
-        <div className="h-[450px] w-full bg-white select-none">
+        {/* --- KHU VỰC BIỂU ĐỒ (CÓ SỰ KIỆN onWheel) --- */}
+        <div 
+            className="h-[450px] w-full bg-white select-none"
+            onWheel={handleWheel} // 👈 Đã thêm sự kiện lăn chuột ở đây
+        >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={visibleData}
-              // Dùng 'any' cho event để tránh lỗi TS
               onMouseDown={(e: any) => e && setRefAreaLeft(e.activeLabel)}
               onMouseMove={(e: any) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
               onMouseUp={zoom}
