@@ -1,5 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
+import React from 'react'; // 👈 QUAN TRỌNG: Phải có dòng này web mới sống lại được!
+
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-10 mt-auto border-t border-gray-200">
@@ -53,4 +55,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}vvvvvvvvvv
+}
