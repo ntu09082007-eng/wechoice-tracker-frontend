@@ -30,7 +30,7 @@ export default function Charts({ apiPayload }) {
   const [refAreaLeft, setRefAreaLeft] = useState(null);
   const [refAreaRight, setRefAreaRight] = useState(null);
 
-  // Tạo Ref để tham chiếu đến thẻ div chứa biểu đồ (Dùng để chặn cuộn trang)
+  // Ref chặn cuộn trang
   const chartContainerRef = useRef(null);
 
   // 1. Xử lý dữ liệu đầu vào
@@ -84,7 +84,6 @@ export default function Charts({ apiPayload }) {
     if (!container) return;
 
     const handleWheel = (e) => {
-      // Chặn trang web bị cuộn khi lăn chuột trong biểu đồ
       e.preventDefault();
 
       if (!data || data.length === 0) return;
@@ -92,7 +91,6 @@ export default function Charts({ apiPayload }) {
       let startIndex = 0;
       let endIndex = data.length - 1;
 
-      // Tìm vị trí zoom hiện tại
       if (zoomLeft) {
         const idx = data.findIndex((d) => d.name === zoomLeft);
         if (idx !== -1) startIndex = idx;
@@ -102,23 +100,19 @@ export default function Charts({ apiPayload }) {
         if (idx !== -1) endIndex = idx;
       }
 
-      // Tính tốc độ zoom
       const currentRange = endIndex - startIndex;
       const zoomFactor = Math.max(1, Math.round(currentRange * 0.05)); 
 
       if (e.deltaY < 0) {
-        // ZOOM IN (Lăn lên)
         if (currentRange > 2) {
           startIndex = startIndex + zoomFactor;
           endIndex = endIndex - zoomFactor;
         }
       } else {
-        // ZOOM OUT (Lăn xuống)
         startIndex = startIndex - zoomFactor;
         endIndex = endIndex + zoomFactor;
       }
 
-      // Kiểm tra biên
       if (startIndex < 0) startIndex = 0;
       if (endIndex >= data.length) endIndex = data.length - 1;
       if (startIndex >= endIndex) {
@@ -126,12 +120,10 @@ export default function Charts({ apiPayload }) {
           endIndex = data.length - 1; 
       }
 
-      // Cập nhật state zoom
       setZoomLeft(data[startIndex].name);
       setZoomRight(data[endIndex].name);
     };
 
-    // Gán sự kiện với passive: false
     container.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
@@ -140,7 +132,7 @@ export default function Charts({ apiPayload }) {
   }, [data, zoomLeft, zoomRight]); 
 
 
-  // Logic Zoom bằng chuột (Click & Drag - giữ lại)
+  // Zoom Click & Drag
   const zoom = () => {
     let left = refAreaLeft;
     let right = refAreaRight;
@@ -168,7 +160,7 @@ export default function Charts({ apiPayload }) {
     setZoomRight(null);
   };
 
-  // Lọc dữ liệu hiển thị
+  // Filter Data
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
     const startIdx = data.findIndex((d) => d.name === zoomLeft);
@@ -213,13 +205,11 @@ export default function Charts({ apiPayload }) {
         {/* --- THANH ĐIỀU KHIỂN --- */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           
-          {/* 👇 UPDATE TẠI ĐÂY: Nhóm nút Trái: Tổng phiếu / Tốc độ 
-              Mình đã thêm class md:w-60 để nó dài ra (khoảng 240px)
-          */}
+          {/* 👇 UPDATE: Kéo dài nút ra 350px (md:w-[350px]) */}
           <div className="flex gap-2 w-full md:w-auto">
             <button
               onClick={() => setChartType("total")}
-              className={`flex-1 md:w-60 px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 md:w-[350px] px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 chartType === "total"
                   ? "bg-[#1a1b26] text-white shadow-lg"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -229,7 +219,7 @@ export default function Charts({ apiPayload }) {
             </button>
             <button
               onClick={() => setChartType("speed")}
-              className={`flex-1 md:w-60 px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 md:w-[350px] px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 chartType === "speed"
                   ? "bg-[#1a1b26] text-white shadow-lg"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -305,9 +295,9 @@ export default function Charts({ apiPayload }) {
           </div>
         </div>
 
-        {/* --- KHU VỰC BIỂU ĐỒ (Được gắn Ref để xử lý Scroll) --- */}
+        {/* --- KHU VỰC BIỂU ĐỒ --- */}
         <div 
-            ref={chartContainerRef} // Gắn Ref vào đây
+            ref={chartContainerRef}
             className="h-[450px] w-full bg-white select-none"
         >
           <ResponsiveContainer width="100%" height="100%">
