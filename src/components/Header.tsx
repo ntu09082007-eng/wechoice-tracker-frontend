@@ -43,7 +43,7 @@ export default function Header() {
             <Link
               key={link.to}
               to={link.to}
-              // ĐÃ SỬA: Bỏ hiệu ứng active:bg-black
+              // CHỈ CÒN HOVER (Xám/Trắng), KHÔNG CÒN ACTIVE ĐEN
               className="px-5 py-2.5 rounded-full font-bold transition-all duration-200
                          bg-white text-gray-600
                          hover:bg-gray-400 hover:text-white
@@ -92,7 +92,6 @@ export default function Header() {
               key={link.to}
               to={link.to}
               onClick={() => setIsMenuOpen(false)}
-              // ĐÃ SỬA: Bỏ hiệu ứng active ở mobile luôn
               className="px-4 py-3 rounded-lg font-semibold text-center transition-colors
                          text-gray-600 bg-white hover:bg-gray-100"
             >
