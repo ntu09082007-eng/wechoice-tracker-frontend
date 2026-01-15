@@ -135,7 +135,7 @@ export default function Charts({ apiPayload }) {
               });
             },
             label: function (context) {
-              return " " + context.parsed.y.toLocaleString() + " phiếu";
+              return " " + context.parsed.y.toLocaleString() + "Bình chọn";
             },
           },
         },
@@ -266,7 +266,7 @@ export default function Charts({ apiPayload }) {
           },
           title: {
             display: true,
-            text: "Phiếu/phút",
+            text: "Bình chọn/phút",
             font: {
               size: 12,
               weight: "bold",
@@ -282,7 +282,7 @@ export default function Charts({ apiPayload }) {
           callbacks: {
             ...options.plugins.tooltip.callbacks,
             label: function (context) {
-              return " " + context.parsed.y.toFixed(1) + " phiếu/phút";
+              return " " + context.parsed.y.toFixed(1) + "Bình chọn/phút";
             },
           },
         },
