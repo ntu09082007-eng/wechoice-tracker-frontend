@@ -192,4 +192,120 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
                           <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                               <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
                               
-                              <button
+                              <button 
+                                  onClick={handleSelectAll} 
+                                  className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
+                                             bg-white text-gray-600 border border-gray-200
+                                             hover:bg-gray-400 hover:text-white 
+                                             active:bg-gray-600 active:text-white"
+                              >
+                                  {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
+                              </button>
+                              
+                          </div>
+                          <div className="space-y-1 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
+                              {candidateNames.map((name, index) => (
+                                  <label key={name} className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors select-none">
+                                      <div className="relative flex items-center">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={selectedCandidates.includes(name)}
+                                            onChange={() => toggleCandidate(name)}
+                                            className="h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        />
+                                      </div>
+                                      <span 
+                                          className="text-xs font-bold truncate flex-1" 
+                                          style={{ color: COLORS[index % COLORS.length] }}
+                                      >
+                                          {name}
+                                      </span>
+                                  </label>
+                              ))}
+                          </div>
+                      </div>
+                  )}
+              </div>
+              
+              {/* NÚT RESET ZOOM */}
+              <button
+                  onClick={resetZoom}
+                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+                  disabled={!zoomLeft && !zoomRight}
+              >
+                  Đặt lại thu phóng
+              </button>
+          </div>
+        </div>
+
+        {/* --- KHU VỰC BIỂU ĐỒ --- */}
+        <div className="h-[450px] w-full bg-white select-none">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={visibleData}
+              // Dùng 'any' cho event để tránh lỗi TS
+              onMouseDown={(e: any) => e && setRefAreaLeft(e.activeLabel)}
+              onMouseMove={(e: any) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
+              onMouseUp={zoom}
+              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+              <XAxis 
+                  dataKey="name" 
+                  tick={{ fontSize: 11, fill: "#9ca3af" }} 
+                  tickLine={false}
+                  axisLine={false}
+                  minTickGap={30}
+                  dy={10}
+              />
+              <YAxis 
+                  tick={{ fontSize: 11, fill: "#9ca3af" }} 
+                  tickLine={false}
+                  axisLine={false}
+                  dx={-10}
+                  tickFormatter={(val) => {
+                      if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+                      if (val >= 1000) return (val / 1000).toFixed(0) + 'k';
+                      return String(val);
+                  }}
+              />
+              <Tooltip 
+                  contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }}
+                  itemStyle={{ fontSize: "12px", fontWeight: 600, padding: 0 }}
+                  labelStyle={{ color: "#111827", fontWeight: "bold", marginBottom: "8px", fontSize: "13px" }}
+              />
+              <Legend wrapperStyle={{ paddingTop: "20px", fontSize: "12px" }} iconType="circle" />
+              
+              {candidateNames.map((name, index) => {
+                  if (!selectedCandidates.includes(name)) return null;
+
+                  const dataKey = chartType === "total" ? name : `${name}_speed`;
+                  return (
+                      <Line
+                          key={name}
+                          type="monotone"
+                          dataKey={dataKey}
+                          name={name}
+                          stroke={COLORS[index % COLORS.length]}
+                          strokeWidth={2}
+                          dot={false}
+                          activeDot={{ r: 5, strokeWidth: 0 }}
+                          animationDuration={500}
+                      />
+                  );
+              })}
+
+              {refAreaLeft && refAreaRight ? (
+                <ReferenceArea x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3} fill="#8884d8" fillOpacity={0.1} />
+              ) : null}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        
+        {showFilter && (
+          <div className="fixed inset-0 z-40" onClick={() => setShowFilter(false)}></div>
+        )}
+      </div>
+    </div>
+  );
+}
