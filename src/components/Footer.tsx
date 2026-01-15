@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-gray-200 text-gray-700 mt-auto w-full border-t border-gray-200 shadow-lg">
       <div className="w-full px-4 md:px-8 py-8">
         
-        {/* Phần nội dung trên */}
+        {/* Phần nội dung trên - GIỮ NGUYÊN */}
         <div className="grid grid-cols-1 xl:grid-cols-5 auto-cols-min gap-y-6 max-w-5xl mx-auto">
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-1 text-black">
@@ -22,36 +22,43 @@ export default function Footer() {
           <div className="xl:col-span-2">
             <h3 className="text-black text-xl font-bold mb-1">Thông tin</h3>
             <p className="text-sm leading-relaxed">
-              Hệ thống tự động cập nhật trực tiếp dữ liệu mỗi{" "}
-              {/* SỬA LỖI: Dùng &nbsp; để hàn dính số 10 và chữ giây */}
+              Hệ thống tự động cập nhật dữ liệu mỗi{" "}
               <b className="whitespace-nowrap">10&nbsp;giây</b>.
-              <br/>
+              <br />
               Đồng thời ghi nhận lại mỗi <b className="whitespace-nowrap">10&nbsp;phút</b> để phân tích và dự đoán.
             </p>
           </div>
         </div>
 
-        {/* Phần dưới */}
+        {/* Phần dưới - ĐÃ SỬA THEO YÊU CẦU */}
         <div className="border-t border-gray-400 mt-8 pt-4 mb-2">
           <div className="flex flex-col md:flex-row justify-between items-end max-w-5xl mx-auto">
             
             {/* Bên trái: Copyright */}
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <p className="text-gray-800 text-sm font-bold">
+              <p className="text-gray-900 text-sm font-bold">
                 Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.
               </p>
               <p className="text-gray-800 text-sm mt-0.5 font-medium">
-                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. 
-                <br/>Tiếp tục dựa trên source code của
-              <h3 className="text-gray-800 text-sm font-extrabold hover:underline">
-              <a href="https://www.threads.com/@_thetreee_" target="_blank" rel="noreferrer"> @_thetreee_</a>
-              </h3>
+                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN.
+                <br />
+                {/* SỬA: Viết liền 1 dòng, dùng thẻ span hoặc a trực tiếp để không bị xuống hàng */}
+                Tiếp tục dựa trên source code của{" "}
+                <a 
+                  href="https://www.threads.net/@_thetreee_" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="font-extrabold hover:underline"
+                >
+                  @_thetreee_
+                </a>
               </p>
             </div>
 
-            {/* Bên phải: Chữ nghệ thuật */}
+            {/* Bên phải: Chữ Thank you dancer! */}
             <div 
-              className="text-black text-4xl leading-none pb-1"
+              // SỬA: Thêm pr-12 (padding-right) để đẩy chữ lùi sang trái một chút cho cân
+              className="text-black text-4xl leading-none pb-1 md:pr-12"
               style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}
             >
               Thank you dancer!
