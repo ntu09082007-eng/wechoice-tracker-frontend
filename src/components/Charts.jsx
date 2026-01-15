@@ -11,7 +11,7 @@ import {
   ReferenceArea,
 } from "recharts";
 
-// Bảng màu
+// Bảng màu hiển thị
 const COLORS = [
   "#e63946", "#457b9d", "#1d3557", "#2a9d8f", "#e9c46a", 
   "#f4a261", "#e76f51", "#8338ec", "#fb5607", "#3a86ff"
@@ -31,25 +31,26 @@ export default function Charts({ apiPayload }) {
   const [refAreaLeft, setRefAreaLeft] = useState(null);
   const [refAreaRight, setRefAreaRight] = useState(null);
 
-  // 1. Xử lý dữ liệu
+  // 1. Xử lý dữ liệu đầu vào
   useEffect(() => {
-    if (!apiPayload || !apiPayload.data) return;
+    // Kiểm tra kỹ dữ liệu trước khi xử lý để tránh lỗi build
+    if (!apiPayload || !Array.isArray(apiPayload.data)) return;
 
-    // Lấy list tên
+    // Lấy danh sách tên ứng viên
     const allNames = new Set();
     apiPayload.data.forEach(entry => {
-      if (entry.candidates) {
+      if (Array.isArray(entry.candidates)) {
         entry.candidates.forEach(c => allNames.add(c.name));
       }
     });
     const namesArray = Array.from(allNames);
 
-    // Mặc định chọn hết nếu chưa chọn ai
+    // Mặc định chọn tất cả nếu chưa có lựa chọn nào
     if (selectedCandidates.length === 0 && namesArray.length > 0) {
       setSelectedCandidates(namesArray);
     }
 
-    // Format data cho Recharts
+    // Chuyển đổi dữ liệu sang định dạng Recharts
     const formattedData = apiPayload.data.map((entry) => {
       const point = {
         name: new Date(entry.recordedAt).toLocaleString("vi-VN", {
@@ -58,7 +59,7 @@ export default function Charts({ apiPayload }) {
         timestamp: new Date(entry.recordedAt).getTime(),
       };
       
-      if (entry.candidates) {
+      if (Array.isArray(entry.candidates)) {
         entry.candidates.forEach((c) => {
           point[c.name] = c.totalVotes;
           point[`${c.name}_speed`] = c.growthRate || 0; 
@@ -69,8 +70,10 @@ export default function Charts({ apiPayload }) {
     }).reverse();
 
     setData(formattedData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiPayload]);
 
+  // Lấy danh sách tên hiển thị từ dữ liệu đã format
   const candidateNames = useMemo(() => {
     if (!data || data.length === 0) return [];
     return Object.keys(data[0]).filter(
@@ -78,20 +81,24 @@ export default function Charts({ apiPayload }) {
     );
   }, [data]);
 
-  // Zoom Logic
+  // Logic Zoom
   const zoom = () => {
     let left = refAreaLeft;
     let right = refAreaRight;
+
     if (left === right || right === "") {
       setRefAreaLeft(null);
       setRefAreaRight(null);
       return;
     }
+
+    // Đảm bảo left luôn nhỏ hơn right
     if (left > right) {
         const temp = left;
         left = right;
         right = temp;
     }
+
     setZoomLeft(left);
     setZoomRight(right);
     setRefAreaLeft(null);
@@ -103,6 +110,7 @@ export default function Charts({ apiPayload }) {
     setZoomRight(null);
   };
 
+  // Lọc dữ liệu hiển thị theo vùng Zoom
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
     return data.filter(
@@ -110,9 +118,10 @@ export default function Charts({ apiPayload }) {
     );
   }, [data, zoomLeft, zoomRight]);
 
-  // Handle Filter
+  // Xử lý Checkbox từng người
   const toggleCandidate = (name) => {
     if (selectedCandidates.includes(name)) {
+      // Không cho phép bỏ chọn hết (giữ lại ít nhất 1 người để tránh lỗi biểu đồ)
       if (selectedCandidates.length > 1) {
           setSelectedCandidates(prev => prev.filter(c => c !== name));
       }
@@ -121,11 +130,12 @@ export default function Charts({ apiPayload }) {
     }
   };
 
+  // Xử lý nút Chọn Tất Cả
   const handleSelectAll = () => {
      if (selectedCandidates.length === candidateNames.length) {
-         setSelectedCandidates([]); 
+         setSelectedCandidates([]); // Bỏ chọn hết
      } else {
-         setSelectedCandidates(candidateNames);
+         setSelectedCandidates(candidateNames); // Chọn hết
      }
   }
 
@@ -159,7 +169,7 @@ export default function Charts({ apiPayload }) {
           </button>
         </div>
 
-        {/* Nhóm nút Phải: Lọc + Zoom */}
+        {/* Nhóm nút Phải: Tuỳ chọn + Zoom */}
         <div className="flex gap-2 w-full md:w-auto relative">
             
             {/* NÚT TUỲ CHỌN ỨNG VIÊN */}
@@ -171,28 +181,28 @@ export default function Charts({ apiPayload }) {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                     </svg>
-                    Tuỳ chọn
+                    Tuỳ chọn ứng viên
                 </button>
 
                 {/* POPUP MENU */}
                 {showFilter && (
-                    <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4">
+                    <div className="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4">
                         <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                             <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
                             
-                            {/* Nút Chọn Tất Cả - Style Flash (Trắng -> Xám -> Đen) */}
+                            {/* 👇 NÚT ĐÃ ĐƯỢC SỬA: CHỈ DÙNG TÔNG XÁM/TRẮNG 👇 */}
                             <button 
                                 onClick={handleSelectAll} 
-                                className="px-3 py-1 rounded-full text-xs font-bold transition-all duration-200 
+                                className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
                                            bg-white text-gray-600 border border-gray-200
                                            hover:bg-gray-400 hover:text-white 
-                                           active:bg-black active:text-white"
+                                           active:bg-gray-600 active:text-white"
                             >
                                 {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
                             </button>
                             
                         </div>
-                        <div className="space-y-1 max-h-60 overflow-y-auto pr-1">
+                        <div className="space-y-1 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
                             {candidateNames.map((name, index) => (
                                 <label key={name} className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors select-none">
                                     <div className="relative flex items-center">
@@ -264,36 +274,11 @@ export default function Charts({ apiPayload }) {
             />
             <Legend wrapperStyle={{ paddingTop: "20px", fontSize: "12px" }} iconType="circle" />
             
-            {/* Lines */}
+            {/* Vẽ đường Line cho các ứng viên được chọn */}
             {candidateNames.map((name, index) => {
+                // Nếu chưa chọn thì không render
                 if (!selectedCandidates.includes(name)) return null;
+
                 const dataKey = chartType === "total" ? name : `${name}_speed`;
                 return (
                     <Line
-                        key={name}
-                        type="monotone"
-                        dataKey={dataKey}
-                        name={name}
-                        stroke={COLORS[index % COLORS.length]}
-                        strokeWidth={2}
-                        dot={false}
-                        activeDot={{ r: 5, strokeWidth: 0 }}
-                        animationDuration={500}
-                    />
-                );
-            })}
-
-            {refAreaLeft && refAreaRight ? (
-              <ReferenceArea x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3} fill="#8884d8" fillOpacity={0.1} />
-            ) : null}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      
-      {/* Overlay đóng popup */}
-      {showFilter && (
-        <div className="fixed inset-0 z-40" onClick={() => setShowFilter(false)}></div>
-      )}
-    </div>
-  );
-}
