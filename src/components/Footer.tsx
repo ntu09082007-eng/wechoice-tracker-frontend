@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Chữ ký (Giữ nguyên font viết tay) */}
           <div className="font-cursive text-2xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive' }}>
-            Thank you dancer!
+            Thank you dancers!
           </div>
         </div>
       </div>
