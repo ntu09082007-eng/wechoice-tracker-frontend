@@ -38,10 +38,10 @@ export default function Footer() {
             {/* Bên trái: Copyright mới */}
             <div className="text-center md:text-left mb-4 md:mb-0">
               <p className="text-gray-800 text-sm font-medium">
-                Copyright © 2025 by ONLYHAN - All for LYHAN.
+                Copyright © 2025 by WeChoice Awards & công ty cổ phần VCCorp.
               </p>
               <p className="text-gray-600 text-sm mt-1">
-                Phát triển độc lập bởi người hâm mộ nghệ sĩ LYHAN.
+                Phát triển độc lập bởi người hâm mộ Nghệ sĩ LYHAN.
               </p>
             </div>
 
