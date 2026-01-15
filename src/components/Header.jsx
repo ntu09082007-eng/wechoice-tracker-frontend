@@ -31,18 +31,12 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 md:px-6 h-[80px] flex items-center justify-between">
         
-        {/* === LOGO & TIÊU ĐỀ === */}
-        <Link to="/" className="flex items-center group">
-          {/* Icon Logo (W cách điệu) */}
-          <svg 
-            className="w-10 h-10 mr-3 text-gray-900 group-hover:text-black transition-colors" 
-            viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 7H13V13H15V7H17V17H15V15H13V17H11V15H9V17H7V7H9V13H11V7Z" />
-          </svg>
+        {/* === LOGO & TIÊU ĐỀ (ĐÃ SỬA) === */}
+        <Link to="/" className="flex items-center">
+          {/* Đã XÓA icon Logo chữ W ở đây */}
 
-          {/* Chữ "WeChoice 2025 Tracker" - Đậm (font-black) và Phình to (scale-x-110) */}
-          <h1 className="text-2xl md:text-3xl font-black text-gray-900 group-hover:text-black transition-colors tracking-normal inline-block transform scale-x-110 origin-left">
+          {/* Chữ "WeChoice 2025 Tracker" - Đã chỉnh mảnh lại (font-extrabold) và bỏ phình to */}
+          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 hover:text-black transition-colors tracking-tight">
             WeChoice 2025 Tracker
           </h1>
         </Link>
