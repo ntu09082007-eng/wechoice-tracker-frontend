@@ -34,7 +34,7 @@ export default function Footer() {
           <p className="text-gray-800 text-sm mb-1 ">
             © Bản quyền giải thưởng thuộc về Cafef.vn & công ty cổ phần VCCorp.
             <br />
-            Phát triển độc lập bởi người hâm mộ chương trình ATVNCG.
+            Phát triển độc lập bởi người hâm mộ Nghệ sĩ LYHAN.
           </p>
           <p className="text-lg font-bold text-black">#camonvidaden</p>
         </div>
