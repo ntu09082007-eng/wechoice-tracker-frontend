@@ -186,4 +186,100 @@ export default function Charts({ apiPayload }) {
                                           onChange={() => toggleCandidate(name)}
                                           className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-gray-300 shadow-sm checked:border-blue-500 checked:bg-blue-500 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-0"
                                       />
-                                      <svg className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" xmlns="
+                                      <svg className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" width="10px" height="10px"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <span 
+                                        className="text-xs font-bold truncate flex-1" 
+                                        style={{ color: COLORS[index % COLORS.length] }}
+                                    >
+                                        {name}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+            
+            {/* NÚT RESET ZOOM (Style cũ) */}
+            <button
+                onClick={resetZoom}
+                className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg text-sm font-bold transition-colors disabled:opacity-50"
+                disabled={!zoomLeft && !zoomRight}
+            >
+                Đặt lại thu phóng
+            </button>
+        </div>
+      </div>
+
+      {/* --- KHU VỰC BIỂU ĐỒ --- */}
+      {/* Đã bỏ border xám, giữ nền trắng sạch sẽ */}
+      <div className="h-[450px] w-full bg-white select-none">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={visibleData}
+            onMouseDown={(e) => setRefAreaLeft(e?.activeLabel)}
+            onMouseMove={(e) => refAreaLeft && setRefAreaRight(e?.activeLabel)}
+            onMouseUp={zoom}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+            <XAxis 
+                dataKey="name" 
+                tick={{ fontSize: 11, fill: "#9ca3af" }} 
+                tickLine={false}
+                axisLine={false}
+                minTickGap={30}
+                dy={10}
+            />
+            <YAxis 
+                tick={{ fontSize: 11, fill: "#9ca3af" }} 
+                tickLine={false}
+                axisLine={false}
+                dx={-10}
+                tickFormatter={(val) => {
+                    if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+                    if (val >= 1000) return (val / 1000).toFixed(0) + 'k';
+                    return val;
+                }}
+            />
+            <Tooltip 
+                contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }}
+                itemStyle={{ fontSize: "12px", fontWeight: 600, padding: 0 }}
+                labelStyle={{ color: "#111827", fontWeight: "bold", marginBottom: "8px", fontSize: "13px" }}
+            />
+            <Legend wrapperStyle={{ paddingTop: "20px", fontSize: "12px" }} iconType="circle" />
+            
+            {/* Lines */}
+            {candidateNames.map((name, index) => {
+                if (!selectedCandidates.includes(name)) return null;
+                const dataKey = chartType === "total" ? name : `${name}_speed`;
+                return (
+                    <Line
+                        key={name}
+                        type="monotone"
+                        dataKey={dataKey}
+                        name={name}
+                        stroke={COLORS[index % COLORS.length]}
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 5, strokeWidth: 0 }}
+                        animationDuration={500}
+                    />
+                );
+            })}
+
+            {refAreaLeft && refAreaRight ? (
+              <ReferenceArea x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3} fill="#8884d8" fillOpacity={0.1} />
+            ) : null}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      
+      {/* Overlay đóng popup */}
+      {showFilter && (
+        <div className="fixed inset-0 z-40" onClick={() => setShowFilter(false)}></div>
+      )}
+    </div>
+  );
+}
