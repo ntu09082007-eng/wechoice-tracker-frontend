@@ -30,12 +30,10 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 h-[80px] flex items-center justify-between">
-        {/* === LOGO & TIÊU ĐỀ (Phần đã sửa) === */}
+        
+        {/* === LOGO & TIÊU ĐỀ === */}
         <Link to="/" className="flex items-center group">
-          {/* 1. HÌNH ẢNH LOGO MỚI (Ví dụ là icon SVG) */}
-          {/* Bạn có thể thay thế toàn bộ thẻ svg này bằng thẻ img của bạn:
-              <img src="/path/to/your/logo.png" alt="Logo" className="w-10 h-10 mr-3" /> 
-          */}
+          {/* Icon Logo (W cách điệu) */}
           <svg 
             className="w-10 h-10 mr-3 text-gray-900 group-hover:text-black transition-colors" 
             viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +41,7 @@ export default function Header() {
             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 7H13V13H15V7H17V17H15V15H13V17H11V15H9V17H7V7H9V13H11V7Z" />
           </svg>
 
-          {/* 2. CHỮ "WeChoice 2025 Tracker" ĐÃ SỬA */}
+          {/* Chữ "WeChoice 2025 Tracker" - Đậm (font-black) và Phình to (scale-x-110) */}
           <h1 className="text-2xl md:text-3xl font-black text-gray-900 group-hover:text-black transition-colors tracking-normal inline-block transform scale-x-110 origin-left">
             WeChoice 2025 Tracker
           </h1>
@@ -56,7 +54,6 @@ export default function Header() {
             <Link
               key={link.to}
               to={link.to}
-              // CHỈ CÒN HOVER (Xám/Trắng), KHÔNG CÒN ACTIVE ĐEN
               className="px-5 py-2.5 rounded-full font-bold transition-all duration-200
                          bg-white text-gray-600
                          hover:bg-gray-400 hover:text-white
