@@ -47,7 +47,7 @@ export default function Footer() {
 
             {/* Bên phải: Chữ nghệ thuật (Màu đen để nổi trên nền xám) */}
             <div className="text-black text-3xl font-serif italic">
-              Cảm ơn vì đã đến
+              Thank you dancers!
             </div>
 
           </div>
