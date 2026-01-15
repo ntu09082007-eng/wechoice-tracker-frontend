@@ -22,11 +22,11 @@ export default function Footer() {
           <div className="xl:col-span-2">
             <h3 className="text-black text-xl font-bold mb-1">Thông tin</h3>
             <p className="text-sm leading-relaxed">
-              {/* SỬA LỖI: Thêm whitespace-nowrap để "10 giây" không bị ngắt dòng */}
               Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ mỗi{" "}
-              <b className="whitespace-nowrap">10 giây</b>.
+              {/* SỬA LỖI: Dùng &nbsp; để hàn dính số 10 và chữ giây */}
+              <b className="whitespace-nowrap">10&nbsp;giây</b>.
               <br />
-              Đồng thời ghi nhận lại mỗi <b className="whitespace-nowrap">10 phút</b> để phân tích và dự đoán.
+              Đồng thời ghi nhận lại mỗi <b className="whitespace-nowrap">10&nbsp;phút</b> để phân tích và dự đoán.
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Footer() {
             {/* Bên trái: Copyright */}
             <div className="text-center md:text-left mb-4 md:mb-0">
               <p className="text-gray-800 text-sm font-bold">
-                Copyright © by WeChoice Awards & công ty cổ phần VC CORP.
+                Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.
               </p>
               <p className="text-gray-800 text-sm mt-0.5 font-medium">
                 Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN. Tiếp tục dựa trên source code của Nguyễn Đình Kiên -
@@ -48,14 +48,12 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Bên phải: Chữ "Thank you dancers!" */}
+            {/* Bên phải: Chữ nghệ thuật */}
             <div 
-              // SỬA: Đổi text-5xl thành text-4xl cho nhỏ lại
               className="text-black text-4xl leading-none pb-1"
-              // Giữ nguyên font Dancing Script đẹp
               style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}
             >
-              Thank you dancers!
+              Thank you dancer!
             </div>
 
           </div>
