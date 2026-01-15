@@ -6,11 +6,10 @@ export default function Footer() {
           {/* About Section */}
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-1 text-black">
-              WeChoice Tracker
+              WeChoice 2025 Tracker
             </h3>
             <p className="text-gray-800 text-sm leading-relaxed">
-              Hệ thống theo dõi và phân tích bình chọn cho giải thưởng FChoice
-              2025 của Cafef.vn.
+              Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
             </p>
             <h3 className="text-gray-800 text-sm font-extrabold hover:underline">
               <a href="https://wechoice.vn/">Truy cập trang web giải thưởng</a>
@@ -32,7 +31,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t mt-8 pt-6 text-center mb-2 border-gray-400">
           <p className="text-gray-800 text-sm mb-1 ">
-            © Bản quyền giải thưởng thuộc về Cafef.vn & công ty cổ phần VCCorp.
+            © Bản quyền giải thưởng thuộc về WeChoice Awards & công ty cổ phần VCCorp.
             <br />
             Phát triển độc lập bởi người hâm mộ Nghệ sĩ LYHAN.
           </p>
