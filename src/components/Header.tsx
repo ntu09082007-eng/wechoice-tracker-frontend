@@ -21,7 +21,7 @@ export default function Header() {
               to="/realtime"
               className="hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
             >
-              <span>WeChoice Tracker</span>
+              <span>WeChoice 2025 Tracker</span>
             </Link>
           </h1>
 
