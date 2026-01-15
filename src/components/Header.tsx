@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -38,26 +37,22 @@ export default function Header() {
           </Link>
         </h1>
 
-        {/* --- DESKTOP MENU (Phần bạn muốn sửa) --- */}
+        {/* --- DESKTOP MENU --- */}
         <nav className="hidden xl:flex items-center gap-2">
-          {navLinks.map((link) => {
-            // Kiểm tra xem link này có đang active không
-            const isActive = location.pathname === link.to || (link.to === "/realtime" && location.pathname === "/");
-            
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-5 py-2.5 rounded-full font-bold transition-all duration-300 ${
-                  isActive
-                    ? "bg-[#1a1b26] text-white shadow-lg" // ACTIVE: Nền đen đậm (Ảnh 2), Chữ trắng
-                    : "text-gray-600 bg-transparent hover:bg-gray-100 hover:text-black" // HOVER: Nền xám nhạt (Ảnh 1)
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              // BỎ logic kiểm tra isActive, áp dụng style cố định cho mọi trạng thái
+              className="px-5 py-2.5 rounded-full font-bold transition-all duration-200
+                         bg-white text-gray-600                                   /* 1. Mặc định: Trắng, Chữ xám */
+                         hover:bg-gray-400 hover:text-white                       /* 2. Hover: Nền xám, Chữ trắng */
+                         active:bg-black active:text-white                        /* 3. Click: Nền đen, Chữ trắng */
+                         hover:shadow-md"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -93,23 +88,18 @@ export default function Header() {
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
         <div className="xl:hidden absolute top-[80px] left-0 w-full bg-white shadow-lg border-t border-gray-100 p-4 flex flex-col gap-2">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.to || (link.to === "/realtime" && location.pathname === "/");
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsMenuOpen(false)}
-                className={`px-4 py-3 rounded-lg font-semibold text-center transition-colors ${
-                   isActive
-                    ? "bg-[#1a1b26] text-white"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 rounded-lg font-semibold text-center transition-colors
+                         text-gray-600 bg-white
+                         active:bg-black active:text-white"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       )}
     </header>
