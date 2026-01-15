@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="md:w-1/2 space-y-3">
             <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
             
-            {/* Style: Đậm & Đen */}
+            {/* Style: Đậm & Đen (như yêu cầu "như cũ") */}
             <p className="text-gray-900 text-sm leading-relaxed font-bold">
               Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
               <br />
