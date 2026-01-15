@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -76,47 +76,13 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     );
   }, [data]);
 
-  // --- LOGIC ZOOM CLICK & DRAG (CŨ) ---
-  const zoom = () => {
-    let left = refAreaLeft;
-    let right = refAreaRight;
-
-    if (left === right || right === "") {
-      setRefAreaLeft(null);
-      setRefAreaRight(null);
-      return;
-    }
-
-    if (left && right && left > right) {
-        const temp = left;
-        left = right;
-        right = temp;
-    }
-
-    setZoomLeft(left);
-    setZoomRight(right);
-    setRefAreaLeft(null);
-    setRefAreaRight(null);
-  };
-
-  const resetZoom = () => {
-    setZoomLeft(null);
-    setZoomRight(null);
-  };
-
-  // --- LOGIC ZOOM BẰNG LĂN CHUỘT (MỚI) ---
+  // Logic Zoom bằng lăn chuột
   const handleWheel = (e: React.WheelEvent) => {
-    // Ngăn cuộn trang khi đang zoom biểu đồ
-    // Lưu ý: React SyntheticEvent không luôn preventDefault được native scroll, 
-    // nhưng ta cứ đặt ở đây, user nên để chuột vào vùng biểu đồ.
-    
     if (!data || data.length === 0) return;
 
-    // 1. Xác định vị trí hiện tại (Index)
     let startIndex = 0;
     let endIndex = data.length - 1;
 
-    // Nếu đang zoom, tìm index của zoomLeft/Right hiện tại
     if (zoomLeft) {
       const idx = data.findIndex(d => d.name === zoomLeft);
       if (idx !== -1) startIndex = idx;
@@ -126,36 +92,28 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
       if (idx !== -1) endIndex = idx;
     }
 
-    // 2. Tính toán tốc độ zoom (Zoom speed)
-    // Zoom 5% số lượng điểm dữ liệu hiện có mỗi lần lăn
     const currentRange = endIndex - startIndex;
     const zoomFactor = Math.max(1, Math.round(currentRange * 0.05)); 
 
-    // 3. Xác định hướng lăn chuột
-    // deltaY < 0 là lăn lên (Zoom In), deltaY > 0 là lăn xuống (Zoom Out)
     if (e.deltaY < 0) {
-      // ZOOM IN: Thu hẹp khoảng cách
-      // Giới hạn không zoom quá sâu (để lại ít nhất 2 điểm)
+      // ZOOM IN
       if (currentRange > 2) {
         startIndex = startIndex + zoomFactor;
         endIndex = endIndex - zoomFactor;
       }
     } else {
-      // ZOOM OUT: Mở rộng khoảng cách
+      // ZOOM OUT
       startIndex = startIndex - zoomFactor;
       endIndex = endIndex + zoomFactor;
     }
 
-    // 4. Kiểm tra biên (Boundaries)
     if (startIndex < 0) startIndex = 0;
     if (endIndex >= data.length) endIndex = data.length - 1;
     if (startIndex >= endIndex) {
-        // Tránh lỗi start vượt quá end
         startIndex = 0; 
         endIndex = data.length - 1; 
     }
 
-    // 5. Cập nhật State
     setZoomLeft(data[startIndex].name);
     setZoomRight(data[endIndex].name);
   };
@@ -163,13 +121,10 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
   // Lọc dữ liệu hiển thị
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
-    // Tìm index để slice cho chính xác và nhanh hơn filter string
     const startIdx = data.findIndex(d => d.name === zoomLeft);
     const endIdx = data.findIndex(d => d.name === zoomRight);
     
     if (startIdx === -1 || endIdx === -1) return data;
-    
-    // Slice data để hiển thị vùng zoom
     return data.slice(Math.min(startIdx, endIdx), Math.max(startIdx, endIdx) + 1);
   }, [data, zoomLeft, zoomRight]);
 
@@ -208,7 +163,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
         {/* --- THANH ĐIỀU KHIỂN --- */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           
-          {/* Nhóm nút Trái */}
+          {/* Nhóm nút Trái: Tổng phiếu / Tốc độ */}
           <div className="flex gap-2 w-full md:w-auto">
             <button
               onClick={() => setChartType("total")}
@@ -232,7 +187,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
             </button>
           </div>
 
-          {/* Nhóm nút Phải */}
+          {/* Nhóm nút Phải: Tuỳ chọn + Zoom */}
           <div className="flex gap-2 w-full md:w-auto relative">
               
               {/* NÚT TUỲ CHỌN ỨNG VIÊN */}
@@ -253,12 +208,12 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
                           <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                               <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
                               
+                              {/* ĐÃ SỬA: Nút này giờ chỉ còn hover, không còn active nháy màu */}
                               <button 
                                   onClick={handleSelectAll} 
                                   className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
                                              bg-white text-gray-600 border border-gray-200
-                                             hover:bg-gray-400 hover:text-white 
-                                             active:bg-gray-600 active:text-white"
+                                             hover:bg-gray-400 hover:text-white"
                               >
                                   {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
                               </button>
@@ -302,11 +257,12 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
         {/* --- KHU VỰC BIỂU ĐỒ (CÓ SỰ KIỆN onWheel) --- */}
         <div 
             className="h-[450px] w-full bg-white select-none"
-            onWheel={handleWheel} // 👈 Đã thêm sự kiện lăn chuột ở đây
+            onWheel={handleWheel}
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={visibleData}
+              // Giữ lại tính năng kéo để zoom (nếu muốn dùng song song với lăn chuột)
               onMouseDown={(e: any) => e && setRefAreaLeft(e.activeLabel)}
               onMouseMove={(e: any) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
               onMouseUp={zoom}
