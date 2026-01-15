@@ -6,14 +6,14 @@ export default function Footer() {
           {/* About Section */}
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-1 text-black">
-              FChoice 2025 Tracker
+              WeChoice Tracker
             </h3>
             <p className="text-gray-800 text-sm leading-relaxed">
               Hệ thống theo dõi và phân tích bình chọn cho giải thưởng FChoice
               2025 của Cafef.vn.
             </p>
             <h3 className="text-gray-800 text-sm font-extrabold hover:underline">
-              <a href="https://fchoice.vn/">Truy cập trang web giải thưởng</a>
+              <a href="https://wechoice.vn/">Truy cập trang web giải thưởng</a>
             </h3>
           </div>
 
