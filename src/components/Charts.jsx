@@ -246,4 +246,54 @@ export default function Charts({ apiPayload }) {
                 minTickGap={30}
                 dy={10}
             />
-            <Y
+            <YAxis 
+                tick={{ fontSize: 11, fill: "#9ca3af" }} 
+                tickLine={false}
+                axisLine={false}
+                dx={-10}
+                tickFormatter={(val) => {
+                    if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+                    if (val >= 1000) return (val / 1000).toFixed(0) + 'k';
+                    return val;
+                }}
+            />
+            <Tooltip 
+                contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }}
+                itemStyle={{ fontSize: "12px", fontWeight: 600, padding: 0 }}
+                labelStyle={{ color: "#111827", fontWeight: "bold", marginBottom: "8px", fontSize: "13px" }}
+            />
+            <Legend wrapperStyle={{ paddingTop: "20px", fontSize: "12px" }} iconType="circle" />
+            
+            {/* Lines */}
+            {candidateNames.map((name, index) => {
+                if (!selectedCandidates.includes(name)) return null;
+                const dataKey = chartType === "total" ? name : `${name}_speed`;
+                return (
+                    <Line
+                        key={name}
+                        type="monotone"
+                        dataKey={dataKey}
+                        name={name}
+                        stroke={COLORS[index % COLORS.length]}
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 5, strokeWidth: 0 }}
+                        animationDuration={500}
+                    />
+                );
+            })}
+
+            {refAreaLeft && refAreaRight ? (
+              <ReferenceArea x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3} fill="#8884d8" fillOpacity={0.1} />
+            ) : null}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      
+      {/* Overlay đóng popup */}
+      {showFilter && (
+        <div className="fixed inset-0 z-40" onClick={() => setShowFilter(false)}></div>
+      )}
+    </div>
+  );
+}
