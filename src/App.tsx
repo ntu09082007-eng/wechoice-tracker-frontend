@@ -17,7 +17,7 @@ import EmptyPage from "./pages/EmptyPage";
 
 // Import Header/Footer
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 
 // 👇 LAYOUT NÀY SẼ TỰ ĐỘNG THÊM HEADER/FOOTER CHO CÁC TRANG CÒN THIẾU
 const MainLayout = () => {
