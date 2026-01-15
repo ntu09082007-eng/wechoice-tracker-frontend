@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart,
@@ -18,12 +17,11 @@ const COLORS = [
   "#f4a261", "#e76f51", "#8338ec", "#fb5607", "#3a86ff"
 ];
 
-// Dùng any để bypass mọi lỗi typescript
-export default function Charts({ apiPayload }: { apiPayload: any }) {
-  const [data, setData] = useState<any[]>([]);
+export default function Charts({ apiPayload }) {
+  const [data, setData] = useState([]);
   const [chartType, setChartType] = useState("total");
   
-  const [selectedCandidates, setSelectedCandidates] = useState<string[]>([]);
+  const [selectedCandidates, setSelectedCandidates] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
 
   // Zoom state
@@ -37,9 +35,9 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     if (!apiPayload || !Array.isArray(apiPayload.data)) return;
 
     const allNames = new Set();
-    apiPayload.data.forEach((entry: any) => {
+    apiPayload.data.forEach((entry) => {
       if (Array.isArray(entry.candidates)) {
-        entry.candidates.forEach((c: any) => allNames.add(c.name));
+        entry.candidates.forEach((c) => allNames.add(c.name));
       }
     });
     const namesArray = Array.from(allNames);
@@ -48,8 +46,8 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
       setSelectedCandidates(namesArray);
     }
 
-    const formattedData = apiPayload.data.map((entry: any) => {
-      const point: any = {
+    const formattedData = apiPayload.data.map((entry) => {
+      const point = {
         name: new Date(entry.recordedAt).toLocaleString("vi-VN", {
             month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"
         }),
@@ -57,7 +55,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
       };
       
       if (Array.isArray(entry.candidates)) {
-        entry.candidates.forEach((c: any) => {
+        entry.candidates.forEach((c) => {
           point[c.name] = c.totalVotes;
           point[`${c.name}_speed`] = c.growthRate || 0; 
         });
@@ -67,6 +65,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     }).reverse();
 
     setData(formattedData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiPayload]);
 
   const candidateNames = useMemo(() => {
@@ -77,18 +76,18 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
   }, [data]);
 
   // Logic Zoom bằng lăn chuột
-  const handleWheel = (e: any) => {
+  const handleWheel = (e) => {
     if (!data || data.length === 0) return;
 
     let startIndex = 0;
     let endIndex = data.length - 1;
 
     if (zoomLeft) {
-      const idx = data.findIndex((d: any) => d.name === zoomLeft);
+      const idx = data.findIndex((d) => d.name === zoomLeft);
       if (idx !== -1) startIndex = idx;
     }
     if (zoomRight) {
-      const idx = data.findIndex((d: any) => d.name === zoomRight);
+      const idx = data.findIndex((d) => d.name === zoomRight);
       if (idx !== -1) endIndex = idx;
     }
 
@@ -149,14 +148,14 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
   // Lọc dữ liệu hiển thị
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
-    const startIdx = data.findIndex((d: any) => d.name === zoomLeft);
-    const endIdx = data.findIndex((d: any) => d.name === zoomRight);
+    const startIdx = data.findIndex((d) => d.name === zoomLeft);
+    const endIdx = data.findIndex((d) => d.name === zoomRight);
     
     if (startIdx === -1 || endIdx === -1) return data;
     return data.slice(Math.min(startIdx, endIdx), Math.max(startIdx, endIdx) + 1);
   }, [data, zoomLeft, zoomRight]);
 
-  const toggleCandidate = (name: any) => {
+  const toggleCandidate = (name) => {
     if (selectedCandidates.includes(name)) {
       if (selectedCandidates.length > 1) {
           setSelectedCandidates(prev => prev.filter(c => c !== name));
@@ -290,8 +289,8 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={visibleData}
-              onMouseDown={(e: any) => e && setRefAreaLeft(e.activeLabel)}
-              onMouseMove={(e: any) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
+              onMouseDown={(e) => e && setRefAreaLeft(e.activeLabel)}
+              onMouseMove={(e) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
               onMouseUp={zoom}
               margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
             >
