@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   esbuild: {
-    jsxInject: `import React from 'react'`, // <-- ĐÂY LÀ CHÌA KHÓA ĐỂ SỬA LỖI!
+    // Dòng này sẽ ép trình duyệt hiểu React, sửa lỗi màn hình trắng
+    jsxInject: "import React from 'react'", 
   },
 })
