@@ -3,9 +3,10 @@ import React from 'react';
 export default function Footer() {
   return (
     <footer className="bg-gray-200 text-gray-700 mt-auto w-full border-t border-gray-200 shadow-lg">
-      <div className="w-full px-8 md:px-16 lg:px-24 py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-5 auto-cols-min gap-y-6 max-w-6xl mx-auto">
-          {/* Phần 1: Giữ nguyên nội dung trên */}
+      <div className="w-full px-4 md:px-8 py-8"> {/* Giảm padding ngang một chút */}
+        
+        {/* Phần nội dung trên - GIỮ NGUYÊN */}
+        <div className="grid grid-cols-1 xl:grid-cols-5 auto-cols-min gap-y-6 max-w-5xl mx-auto">
           <div className="xl:col-span-3">
             <h3 className="text-2xl font-extrabold mb-1 text-black">
               WeChoice 2025 Tracker
@@ -29,27 +30,28 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Phần 2: Footer Bottom - Sửa giống ảnh mẫu 100% */}
+        {/* --- PHẦN DƯỚI ĐÂY LÀ QUAN TRỌNG --- */}
         <div className="border-t border-gray-400 mt-8 pt-4 mb-2">
-          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto">
+          {/* max-w-5xl: Bóp chiều rộng lại để 2 bên gần nhau hơn */}
+          <div className="flex flex-col md:flex-row justify-between items-end max-w-5xl mx-auto">
             
-            {/* Bên trái: Thông tin bản quyền */}
+            {/* Bên trái: Copyright */}
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <p className="text-gray-800 text-sm font-medium">
-                Copyright © 2025 by ONLYHAN - All for LYHAN.
+              <p className="text-gray-800 text-sm font-bold">
+                Copyright © by WeChoice Awards 2025 & Công ty cổ phần VC CORP.
               </p>
-              <p className="text-gray-800 text-sm mt-0.5">
-                Phát triển độc lập bởi người hâm mộ nghệ sĩ LYHAN.
+              <p className="text-gray-800 text-sm mt-0.5 font-medium">
+                Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN.
               </p>
             </div>
 
-            {/* Bên phải: Chữ nghệ thuật dùng font Great Vibes */}
-            {/* style={{ fontFamily: '"Great Vibes", cursive' }} để ép dùng font vừa tải */}
+            {/* Bên phải: Chữ "Thank you dancer!" */}
             <div 
-              className="text-black text-4xl" 
-              style={{ fontFamily: '"Great Vibes", cursive', fontWeight: 400 }}
+              className="text-black text-5xl md:text-5xl leading-none pb-1"
+              // Dùng font Dancing Script, chỉnh đậm lên tí (700) cho giống ảnh mẫu
+              style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}
             >
-              Cảm ơn vì đã đến
+              Thank you dancer!
             </div>
 
           </div>
