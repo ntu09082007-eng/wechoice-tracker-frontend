@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+// Đã XÓA 'useRef' khỏi import để tránh lỗi build
 import {
   LineChart,
   Line,
@@ -17,7 +18,7 @@ const COLORS = [
   "#f4a261", "#e76f51", "#8338ec", "#fb5607", "#3a86ff"
 ];
 
-// Sử dụng 'any' để tránh lỗi TypeScript build
+// Sử dụng 'any' để an toàn tuyệt đối với TypeScript strict mode
 export default function Charts({ apiPayload }: { apiPayload: any }) {
   const [data, setData] = useState<any[]>([]);
   const [chartType, setChartType] = useState<"total" | "speed">("total");
@@ -118,6 +119,34 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
     setZoomRight(data[endIndex].name);
   };
 
+  // Logic Zoom bằng chuột (Click & Drag - vẫn giữ lại)
+  const zoom = () => {
+    let left = refAreaLeft;
+    let right = refAreaRight;
+
+    if (left === right || right === "") {
+      setRefAreaLeft(null);
+      setRefAreaRight(null);
+      return;
+    }
+
+    if (left && right && left > right) {
+        const temp = left;
+        left = right;
+        right = temp;
+    }
+
+    setZoomLeft(left);
+    setZoomRight(right);
+    setRefAreaLeft(null);
+    setRefAreaRight(null);
+  };
+
+  const resetZoom = () => {
+    setZoomLeft(null);
+    setZoomRight(null);
+  };
+
   // Lọc dữ liệu hiển thị
   const visibleData = useMemo(() => {
     if (!zoomLeft || !zoomRight) return data;
@@ -208,7 +237,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
                           <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
                               <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
                               
-                              {/* ĐÃ SỬA: Nút này giờ chỉ còn hover, không còn active nháy màu */}
+                              {/* NÚT CHỌN TẤT CẢ (Đã xóa active đen) */}
                               <button 
                                   onClick={handleSelectAll} 
                                   className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
@@ -254,7 +283,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
           </div>
         </div>
 
-        {/* --- KHU VỰC BIỂU ĐỒ (CÓ SỰ KIỆN onWheel) --- */}
+        {/* --- KHU VỰC BIỂU ĐỒ (CÓ SỰ KIỆN onWheel + onMouseDown) --- */}
         <div 
             className="h-[450px] w-full bg-white select-none"
             onWheel={handleWheel}
@@ -262,7 +291,7 @@ export default function Charts({ apiPayload }: { apiPayload: any }) {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={visibleData}
-              // Giữ lại tính năng kéo để zoom (nếu muốn dùng song song với lăn chuột)
+              // Giữ lại tính năng kéo chuột để zoom
               onMouseDown={(e: any) => e && setRefAreaLeft(e.activeLabel)}
               onMouseMove={(e: any) => refAreaLeft && e && setRefAreaRight(e.activeLabel)}
               onMouseUp={zoom}
