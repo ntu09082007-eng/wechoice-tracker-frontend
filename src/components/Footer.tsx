@@ -52,7 +52,7 @@ export default function Footer() {
             <div className="text-sm text-gray-900 space-y-1 text-center md:text-left">
               <p className="font-bold">Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
               <p className="font-normal">
-                Phát triển độc lập bởi người hâm mộ
+                Phát triển độc lập bởi người hâm mộ 
                 <a 
                   href="https://www.facebook.com/profile.php?id=100075664732643" 
                   target="_blank" 
