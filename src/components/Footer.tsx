@@ -5,17 +5,19 @@ import React from 'react';
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-10 mt-auto border-t border-gray-200">
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-4">
         
-        {/* WRAPPER: max-w-7xl để rộng rãi, không bị rớt chữ */}
-        <div className="max-w-7xl mx-auto">
+        {/* --- WRAPPER CHÍNH --- */}
+        {/* 1. max-w-7xl: Giữ độ rộng tối đa để không bị rớt chữ */}
+        {/* 2. md:px-12 lg:px-24: Đẩy nội dung từ 2 bên vào trong "1 tí" như bạn muốn */}
+        <div className="max-w-7xl mx-auto md:px-12 lg:px-24">
 
           {/* --- PHẦN TRÊN --- */}
-          {/* justify-between: Đẩy 2 cục ra sát lề trái và phải */}
+          {/* justify-between: Đẩy 2 cột sang 2 phía */}
           <div className="flex flex-col md:flex-row justify-between gap-8 mb-8">
             
-            {/* Cột trái */}
-            <div className="space-y-3 text-center md:text-left">
+            {/* Cột trái: Căn lề trái (Mặc định) */}
+            <div className="space-y-3 text-left">
               <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
               <p className="text-gray-900 text-sm leading-relaxed font-normal">
                 Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
@@ -31,8 +33,9 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Cột phải */}
-            <div className="space-y-3 text-center md:text-right">
+            {/* Cột phải: Đã sửa thành CĂN LỀ TRÁI (text-left) */}
+            {/* Dù căn lề trái, nhưng nhờ justify-between nên cả khối này vẫn nằm bên phải màn hình */}
+            <div className="space-y-3 text-left">
               <h3 className="text-xl font-extrabold text-gray-900">Thông tin</h3>
               <p className="text-gray-900 text-sm leading-relaxed font-normal">
                 Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ mỗi <strong className="font-bold">10 giây</strong>.
@@ -42,14 +45,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Đường gạch ngang */}
+          {/* Đường gạch ngang (Giữ nguyên) */}
           <div className="h-px bg-gray-300 w-full mb-8"></div>
 
           {/* --- PHẦN DƯỚI --- */}
-          {/* justify-between: Đẩy cục Copyright sang trái (thẳng hàng trên), cục Chữ ký sang phải */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
             
-            {/* Copyright & Credits: Nằm sát lề trái */}
+            {/* Copyright & Credits */}
             <div className="text-sm text-gray-900 space-y-1">
               <p className="font-bold">Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
               <p className="font-normal">
@@ -67,8 +69,8 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Chữ ký: Nằm sát lề phải, IN ĐẬM và TO */}
-            <div className="font-cursive font-bold text-4xl md:text-5xl text-gray-900 md:pr-4" style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}>
+            {/* Chữ ký: Giữ nguyên độ đậm và size */}
+            <div className="font-cursive font-bold text-4xl md:text-5xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}>
               Thank you dancer!
             </div>
           </div>
