@@ -162,6 +162,53 @@ export default function AboutPage() {
               </li>
             </ul>
 
+            {/* Trang Thống kê */}
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-2xl font-bold text-gray-800">
+              Tính năng: Thống kê (Stats)
+            </h2>
+          </div>
+          <div className="space-y-3 text-gray-700">
+            <p>
+              <strong>Mục đích:</strong> Phân tích xu hướng bình chọn qua các
+              mốc thời gian.
+            </p>
+            <p>
+              <strong>Cách sử dụng:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Chọn hạng mục muốn xem thống kê.</li>
+              <li>
+                Hệ thống sẽ hiển thị Lịch sử bình chọn và Biểu đồ bình chọn.
+              </li>
+            </ul>
+            <p>
+              <strong>Lịch sử bình chọn:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>
+                Hiển thị tất cả các bản ghi (tức số bình chọn của từng ứng viên
+                được hệ thống ghi nhận trong lịch sử), cùng với đó là chênh lệch
+                số bình chọn so với bản ghi gần nhất trước đó.
+              </li>
+
+              <li>
+                Có thể lọc bản ghi theo các tiêu chí:
+                <ul className="list-circle list-inside ml-6 mt-1">
+                  <li>
+                    <b>Thời gian giữa hai bản ghi:</b> Ví dụ chỉ lấy các bản ghi
+                    cách nhau 30 phút, 1 tiếng,... Mặc định (không lọc) là 10
+                    phút.
+                  </li>
+                  <li>
+                    <b>Ngày bắt đầu lấy bản ghi:</b> Ví dụ chỉ lấy các bản ghi
+                    từ ngày 3/6/2025.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            
             <p>
               <strong>Biểu đồ bình chọn: </strong>
               Có 2 loại là Biểu đồ tổng số phiếu, hiển thị sự thay đổi tổng số
