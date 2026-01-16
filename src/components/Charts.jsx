@@ -247,19 +247,21 @@ export default function Charts({ apiPayload }) {
                   {/* POPUP MENU */}
                   {showFilter && (
                       <div className="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4">
-                          <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-50">
-                              <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">Hiển thị</span>
-                              
-                              <button 
-                                  onClick={handleSelectAll} 
-                                  className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 
-                                             bg-white text-gray-600 border border-gray-200
-                                             hover:bg-gray-400 hover:text-white"
-                              >
-                                  {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
-                              </button>
-                              
-                          </div>
+                          {/* --- Header của Menu Filter (Đã sửa căn giữa) --- */}
+<div className="relative flex items-center justify-center mb-3 pb-2 border-b border-gray-50">
+  {/* 1. Chữ HIỂN THỊ nằm chính giữa */}
+  <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">
+    HIỂN THỊ
+  </span>
+
+  {/* 2. Nút bấm dính chặt bên phải (Absolute) */}
+  <button
+    onClick={handleSelectAll}
+    className="absolute right-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 bg-white text-gray-600 border border-gray-200 hover:bg-gray-400 hover:text-white"
+  >
+    {selectedCandidates.length === candidateNames.length ? "Bỏ chọn" : "Chọn tất cả"}
+  </button>
+</div>
                           <div className="space-y-1 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
                               {candidateNames.map((name, index) => (
                                   <label key={name} className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors select-none">
