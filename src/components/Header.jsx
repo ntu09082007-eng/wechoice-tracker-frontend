@@ -1,53 +1,97 @@
-// @ts-nocheck
-/* eslint-disable */
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Hàm kiểm tra trạng thái Active
-  const isActive = (path) => {
-    if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
-    return false;
-  };
-
-  const navItems = [
-    { name: 'Kết quả', path: '/' },
-    { name: 'Thống kê', path: '/stats' },
-    { name: 'Biểu đồ', path: '/charts' },
-    { name: 'Dự đoán', path: '/prediction' },
-    { name: 'Giới thiệu & Hướng dẫn', path: '/about' },
+  const navLinks = [
+    { to: "/realtime", label: "Kết quả" },
+    { to: "/stats", label: "Thống kê" },
+    { to: "/prediction", label: "Dự đoán" },
+    { to: "/about", label: "Giới thiệu & Hướng dẫn" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          
-          {/* Logo màu xanh dương đậm */}
-          <div className="text-xl font-extrabold text-blue-700 hidden md:block">
-             WeChoice 2025 Tracker
-          </div>
+    <header className="bg-white shadow-lg w-full border-b border-gray-200">
+      <div className="w-full px-8 md:px-16 lg:px-24 py-5">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl md:text-3xl font-bold text-white">
+            <Link
+              to="/realtime"
+              className="hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
+            >
+              <span>FChoice 2025 Tracker</span>
+            </Link>
+          </h1>
 
-          {/* Thanh Menu */}
-          <nav className="flex items-center gap-1 md:gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar justify-center md:justify-end">
-            {navItems.map((item) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden xl:flex gap-4">
+            {navLinks.map((link) => (
               <Link
-                key={item.path}
-                to={item.path}
-                className={`px-3 md:px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
-                  isActive(item.path)
-                    ? 'bg-slate-500 text-white shadow-md' // Đang chọn: Nền xám chì, chữ trắng
-                    : 'text-gray-500 bg-transparent hover:bg-gray-100 hover:text-gray-900' // Bình thường: Chữ xám, trong suốt. Hover: Nền xám nhạt.
+                key={link.to}
+                to={link.to}
+                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 ${
+                  location.pathname === link.to
+                    ? "bg-gray-900 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                {item.name}
+                {link.label}
               </Link>
             ))}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="xl:hidden bg-gray-100 text-gray-900 p-2 hover:bg-gray-200 rounded-lg transition-colors shadow-md"
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isMenuOpen && (
+          <nav className="xl:hidden mt-4 flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setIsMenuOpen(false)}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-center ${
+                  location.pathname === link.to
+                    ? "bg-gray-900 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
     </header>
   );
