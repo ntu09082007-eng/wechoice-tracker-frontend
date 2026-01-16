@@ -166,9 +166,7 @@ export default function History({ apiPayload }) {
                     <span className="text-xs ml-1">{sortAsc ? "▲" : "▼"}</span>
                   </th>
                   {candidateNames.map((name) => {
-                    const isHighlighted = candidatesData.priority.some(
-                      (p) => p.name === name
-                    );
+                    const isHighlighted = name.includes("TPB");
                     return (
                       <th
                         key={name}
@@ -211,9 +209,7 @@ export default function History({ apiPayload }) {
                           (c) => c.name === cn
                         );
 
-                        const isHighlighted = candidatesData.priority.some(
-                          (p) => p.name === cn
-                        );
+                        const isHighlighted = cn.includes("TPB");
 
                         // Tính voteDiff dựa trên dữ liệu đã lọc
                         let voteDiff = 0;
