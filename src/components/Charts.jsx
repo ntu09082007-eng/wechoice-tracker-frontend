@@ -246,7 +246,7 @@ export default function Charts({ apiPayload }) {
 
                   {/* POPUP MENU */}
                   {showFilter && (
-                      <div className="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4">
+                      <div className="fixed bottom-0 left-0 right-0 z-[100] w-full p-4 bg-white border-t border-gray-200 rounded-t-2xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] md:absolute md:bottom-auto md:left-auto md:right-0 md:top-full md:w-72 md:rounded-xl md:border md:shadow-2xl md:mt-2">
                         {/* --- Header của Menu Filter (Đã sửa bố cục sang 2 bên) --- */}
                         {/* Dùng justify-between để đẩy chữ sang trái, nút sang phải */}
                         <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-50">
