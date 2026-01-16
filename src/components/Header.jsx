@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Header() {
   const location = useLocation();
 
-  // Hàm kiểm tra active đơn giản
+  // Hàm kiểm tra trạng thái Active
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
@@ -26,12 +26,12 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           
-          {/* Logo/Tên web màu xanh dương đậm đơn giản */}
+          {/* Tên thương hiệu màu xanh dương đậm */}
           <div className="text-xl font-extrabold text-blue-700 hidden md:block">
              WeChoice 2025 Tracker
           </div>
 
-          {/* Menu */}
+          {/* Thanh điều hướng */}
           <nav className="flex items-center gap-1 md:gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar justify-center md:justify-end">
             {navItems.map((item) => (
               <Link
@@ -39,8 +39,8 @@ export default function Header() {
                 to={item.path}
                 className={`px-3 md:px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
                   isActive(item.path)
-                    ? 'bg-slate-500 text-white shadow-md' // Active: Màu xám đậm (Slate)
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' // Inactive: Màu xám nhạt
+                    ? 'bg-slate-400 text-white shadow-sm' // Nền xám chữ trắng như cũ
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' // Chữ xám nền trong suốt
                 }`}
               >
                 {item.name}
