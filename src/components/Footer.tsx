@@ -70,9 +70,7 @@ export default function Footer() {
                 Thank you dancers!
               </div>
             </div>
-
           </div>
-
         </div> 
       </div>
     </footer>
