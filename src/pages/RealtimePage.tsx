@@ -24,7 +24,8 @@ export default function RealtimePage() {
 
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [voteChanges, setVoteChanges] = useState<Record<number, number>>({});
+  
   useEffect(() => {
     try {
       const payload = finalResult as ApiResponse;
@@ -62,6 +63,22 @@ export default function RealtimePage() {
         grouped[category].sort((a, b) => b.totalVotes - a.totalVotes);
       });
 
+      // --- CHÈN ĐOẠN NÀY VÀO TRƯỚC setData(grouped) ---
+const changes: Record<number, number> = {};
+// Duyệt qua tất cả ứng viên mới lấy về để so sánh
+Object.values(grouped).flat().forEach((cand: Candidate) => {
+  // Lấy số vote cũ từ Ref (dòng 23 bạn đã có sẵn)
+  const oldVote = prevVotesRef.current[cand.id] || 0;
+  
+  if (oldVote > 0 && cand.totalVotes > oldVote) {
+    // Nếu vote mới > vote cũ thì lưu số chênh lệch
+    changes[cand.id] = cand.totalVotes - oldVote;
+  }
+  
+  // Cập nhật lại số vote mới nhất vào Ref để dùng cho lần sau
+  prevVotesRef.current[cand.id] = cand.totalVotes;
+});
+setVoteChanges(changes); // Lưu thay đổi vào State
       setData(grouped);
       setIsLoading(false);
     } catch (error) {
