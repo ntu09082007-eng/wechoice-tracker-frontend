@@ -126,9 +126,7 @@ export default function RealtimePage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {candidates.map((c, index) => {
-                    const isHighlighted = candidatesData.priority.some(
-                      (p) => p.name === c.name
-                    );
+                    const isHighlighted = c.name.includes("TPB") || c.name.includes("SHB");
                     return (
                       <tr
                         key={c.id}
