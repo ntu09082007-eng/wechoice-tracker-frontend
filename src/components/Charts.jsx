@@ -247,20 +247,18 @@ export default function Charts({ apiPayload }) {
                   {/* POPUP MENU */}
                   {showFilter && (
                       <div className="absolute right-0 top-full mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 p-4">
-                          {/* --- Header của Menu Filter (Đã sửa căn giữa) --- */}
-                        {/* --- Header của Menu Filter (Đã đổi màu nút) --- */}
-                        <div className="relative flex items-center justify-center mb-3 pb-2 border-b border-gray-50">
+                        {/* --- Header của Menu Filter (Đã sửa bố cục sang 2 bên) --- */}
+                        {/* Dùng justify-between để đẩy chữ sang trái, nút sang phải */}
+                        <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-50">
+                          {/* Chữ HIỂN THỊ nằm bên trái */}
                           <span className="font-bold text-gray-800 text-xs uppercase tracking-wider">
                             HIỂN THỊ
                           </span>
+
+                          {/* Nút bấm nằm bên phải (Không cần absolute nữa) */}
                           <button
                             onClick={handleSelectAll}
-                            // TÔI ĐÃ SỬA CLASS Ở DÒNG DƯỚI ĐÂY:
-                            // 1. Bỏ bg-white, border-gray-200, text-gray-600 (style xám cũ)
-                            // 2. Thêm bg-gradient-to-r from-blue-500 to-indigo-600 (Nền màu gradient xanh tím)
-                            // 3. Thêm text-white (Chữ trắng)
-                            // 4. Thêm shadow-sm và hiệu ứng hover mới cho đẹp
-                            className="absolute right-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-sm hover:shadow-md hover:brightness-110 border-none"
+                            className="px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-sm hover:shadow-md hover:brightness-110 border-none"
                             >
                             {selectedCandidates.length === candidateNames.length
                               ? "Bỏ chọn"
