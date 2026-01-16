@@ -3,7 +3,7 @@ export default function AboutPage() {
     <div className="px-4 md:px-8 py-10 max-w-6xl mx-auto">
       <div className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Về FChoice 2025 Tracker
+          WeChoice 2025 Tracker
         </h1>
       </div>
 
@@ -14,14 +14,14 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-gray-800">Giới thiệu</h2>
           </div>
           <p className="text-gray-700 leading-relaxed mb-2">
-            FChoice 2025 Tracker là công cụ theo dõi và phân tích kết quả bình
-            chọn của FChoice 2025 theo thời gian thực. Đồng thời cung cấp các
-            tính năng thống kê, dự đoán và cập nhật trực tiếp giúp bạn nắm bắt
-            một cách trực quan về xu hướng bình chọn.
+            WeChoice 2025 Tracker là công cụ theo dõi và phân tích
+            kết quả bình chọn của WeChoice Awards 2025 theo thời gian thực.
+            Đồng thời cung cấp các tính năng thống kê,
+            dự đoán và cập nhật trực tiếp giúp bạn nắm bắt một cách trực quan về xu hướng bình chọn.
           </p>
           <h3 className="text-lg font-extrabold hover:underline">
-            <a href="https://fchoice.vn/">
-              Truy cập trang web giải thưởng: <b>fchoice.vn</b>
+            <a href="https://wechoice.vn/">
+              Truy cập trang web giải thưởng: <b>/wechoice.vn</b>
             </a>
           </h3>
         </div>
