@@ -6,8 +6,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { to: "/realtime", label: "Kết quả" },
-    { to: "/stats", label: "Thống kê" },
+    { to: "/realtime", label: "Thống kê" },
+    { to: "/stats", label: "Lịch sử" },
     { to: "/charts", label: "Biểu đồ" },
     { to: "/prediction", label: "Dự đoán" },
     { to: "/about", label: "Giới thiệu & Hướng dẫn" },
@@ -22,7 +22,7 @@ export default function Header() {
               to="/realtime"
               className="hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
             >
-              <span>FChoice 2025 Tracker</span>
+              <span>WeChoice 2025 Tracker</span>
             </Link>
           </h1>
 
