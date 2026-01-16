@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Header() {
   const location = useLocation();
 
-  // Kiểm tra trang hiện tại để set trạng thái Active
+  // Hàm kiểm tra trạng thái Active
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
@@ -26,30 +26,26 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           
-          {/* Tên thương hiệu */}
+          {/* Logo màu xanh dương đậm */}
           <div className="text-xl font-extrabold text-blue-700 hidden md:block">
              WeChoice 2025 Tracker
           </div>
 
           {/* Thanh Menu */}
           <nav className="flex items-center gap-1 md:gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar justify-center md:justify-end">
-            {navItems.map((item) => {
-              const active = isActive(item.path);
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  style={active ? { backgroundColor: '#1D1E2C' } : {}}
-                  className={`px-3 md:px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
-                    active
-                      ? 'text-white shadow-md' // Đang ở tab nào: Chữ trắng, nền xanh đen (set qua style)
-                      : 'text-gray-500 bg-transparent hover:bg-gray-200 hover:text-white' // Bình thường: Chữ xám, nền trong. Hover: Nền xám nhạt, chữ trắng.
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`px-3 md:px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
+                  isActive(item.path)
+                    ? 'bg-slate-500 text-white shadow-md' // Đang chọn: Nền xám chì, chữ trắng
+                    : 'text-gray-500 bg-transparent hover:bg-gray-100 hover:text-gray-900' // Bình thường: Chữ xám, trong suốt. Hover: Nền xám nhạt.
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
