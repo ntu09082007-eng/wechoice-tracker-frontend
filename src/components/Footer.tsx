@@ -7,8 +7,7 @@ export default function Footer() {
     <footer className="bg-gray-100 py-10 mt-auto border-t border-gray-200">
       <div className="container mx-auto px-4">
         
-        {/* --- WRAPPER CHÍNH --- */}
-        {/* SỬA 1: Giảm padding xuống (md:px-8) để mở rộng không gian, KHẮC PHỤC RỚT CHỮ */}
+        {/* WRAPPER CHÍNH: Giữ padding nhỏ (md:px-8) để không bị rớt chữ */}
         <div className="max-w-7xl mx-auto md:px-8">
 
           {/* --- PHẦN TRÊN (Thông tin chính) --- */}
@@ -16,7 +15,7 @@ export default function Footer() {
             {/* Cột trái */}
             <div className="space-y-3 text-left">
               <h2 className="text-xl font-extrabold text-gray-900">WeChoice 2025 Tracker</h2>
-              {/* whitespace-nowrap trên màn hình lớn để ép không xuống dòng nếu cần thiết */}
+              {/* whitespace-nowrap để chống rớt chữ trên màn hình lớn */}
               <p className="text-gray-900 text-sm leading-relaxed font-normal md:whitespace-nowrap">
                 Hệ thống theo dõi và phân tích bình chọn cho giải thưởng WeChoice Awards 2025.
                 <br />
@@ -46,7 +45,7 @@ export default function Footer() {
           <div className="h-px bg-gray-300 w-full mb-8"></div>
 
           {/* --- PHẦN DƯỚI (Copyright & Chữ ký) --- */}
-          {/* SỬA 2: Dùng GRID 2 cột để căn chỉnh chữ ký vào "giữa khoảng trống bên phải" */}
+          {/* Vẫn dùng GRID 2 cột để chia đôi không gian */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             
             {/* Cột 1 (Trái): Copyright - Căn trái thẳng hàng với trên */}
@@ -55,7 +54,7 @@ export default function Footer() {
               <p className="font-normal">
                 Phát triển độc lập bởi người hâm mộ Nghệ Sĩ LYHAN.
                 <br/>
-                Được tiếp tục dựa trên source code của&nbsp;
+                Tiếp tục dựa trên source code của&nbsp;
                 <a 
                   href="https://www.threads.com/@_thetreee_" 
                   target="_blank" 
@@ -67,11 +66,10 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Cột 2 (Phải): Chữ ký - CĂN GIỮA (Center) trong cột này */}
-            {/* Điều này giúp chữ ký nằm chính xác ở giữa phần không gian bên phải */}
-            <div className="flex justify-center md:justify-center">
+            {/* Cột 2 (Phải): Chữ ký - SỬA Ở ĐÂY: Đổi thành CĂN PHẢI (text-right) */}
+            <div className="text-center md:text-right">
               <div className="font-cursive font-bold text-4xl md:text-5xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}>
-                Thank you dancers!
+                Thank you dancer!
               </div>
             </div>
 
