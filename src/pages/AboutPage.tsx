@@ -268,9 +268,9 @@ export default function AboutPage() {
             <div className="bg-gray-100 rounded-lg p-4 mt-4">
               <p className="text-sm">
                 <strong>Lưu ý:</strong> Dự đoán chỉ mang tính chất tham khảo,
-                dựa trên xu hướng hiện tại và quá khứ. Kết quả thực tế có thể
-                thay đổi do ảnh hưởng của nhiều yếu tố như mức độ "điêng" của
-                cộng đồng, "Góc lạm quyền",...
+                dựa trên xu hướng bình chọn của hiện tại và quá khứ. Kết quả
+                thực tế có thể thay đổi do ảnh hưởng của nhiều yếu tố như mức
+                độ "điên" của cộng đồng, "góc lạm quyền",...
               </p>
             </div>
           </div>
