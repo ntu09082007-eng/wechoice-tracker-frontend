@@ -136,6 +136,10 @@ setVoteChanges(changes); // Lưu thay đổi vào State
                     <th className="p-3 text-left font-semibold text-gray-700 w-2/3">
                       Ứng viên
                     </th>
+                    {/* Chèn vào dòng 138-139 */}
+<th className="p-3 text-center font-semibold text-gray-700 w-[100px] hidden md:table-cell">
+  Thay đổi
+</th>
                     <th className="p-3 text-center font-semibold text-gray-700">
                       Tổng bình chọn
                     </th>
@@ -171,6 +175,17 @@ setVoteChanges(changes); // Lưu thay đổi vào State
                             </span>
                           </div>
                         </td>
+                        {/* --- CỘT THAY ĐỔI (Chèn vào giữa Name và Total Votes) --- */}
+                  <td className="p-3 text-center hidden md:table-cell">
+                    {voteChanges[c.id] ? (
+                      <span className="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-xs font-bold whitespace-nowrap">
+                        +{voteChanges[c.id].toLocaleString('vi-VN')}
+                      </span>
+                    ) : (
+                      <span className="text-gray-300 text-xs">-</span>
+                    )}
+                  </td>
+                  {/* -------------------------------------------------------- */}
                         <td
                           className={`p-3 text-center font-semibold whitespace-nowrap ${
                             isHighlighted ? "text-rose-700" : "text-gray-900"
