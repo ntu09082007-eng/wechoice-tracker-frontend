@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 // Import Header & Footer vào lại
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 import CategorySelector from "../components/CategorySelector";
 import History from "../components/History";
@@ -55,8 +53,6 @@ export default function StatsPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. THÊM HEADER */}
-      <Header />
 
       <main className="flex-grow w-full mb-[20px] min-h-[calc(100vh-80px)]">
         <div className="px-4 md:px-8 py-10 max-w-[95%] mx-auto">
@@ -99,8 +95,6 @@ export default function StatsPage() {
         </div>
       </main>
 
-      {/* 2. THÊM FOOTER */}
-      <Footer />
     </div>
   );
 }
