@@ -52,18 +52,16 @@ export default function Footer() {
             <div className="text-sm text-gray-900 space-y-1 text-center md:text-left">
               <p className="font-bold">Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
               <p className="font-normal">
-                Phát triển độc lập bởi người hâm mộ&nbsp; {/* Thêm &nbsp; ở đây để ép có khoảng cách */}
+                Phát triển độc lập bởi người hâm mộ {/* Xóa hết &nbsp; hoặc dấu cách ở cuối dòng này */}
                 <a
                   href="https://www.facebook.com/profile.php?id=100075664732643"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:underline hover:text-gray-700 transition-colors"
                   >
-                  Nghệ Sĩ LYHAN.
+                  Nghệ Sĩ LYHAN. {/* Đảm bảo chữ Nghệ nằm sát đầu thẻ <a> */}
                 </a>
               </p>
-            </div>
-
             {/* Cột 2 (Phải): Chữ ký - SỬA Ở ĐÂY: Đổi thành CĂN PHẢI (text-right) */}
             <div className="text-center md:text-right">
               <div className="font-cursive font-bold text-4xl md:text-5xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}>
