@@ -138,7 +138,7 @@ setVoteChanges(changes); // Lưu thay đổi vào State
     </th>
     {/* Cột Tổng bình chọn đưa lên trước */}
     <th className="p-3 text-center font-semibold text-gray-700">
-      Tổng bình chọn
+      Bình chọn
     </th>
     {/* Cột Thay đổi đưa xuống sau cùng */}
     <th className="p-3 text-center font-semibold text-gray-700 w-[100px] hidden md:table-cell">
