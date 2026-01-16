@@ -34,7 +34,7 @@ export default function Footer() {
             <div className="space-y-3 text-left">
               <h3 className="text-xl font-extrabold text-gray-900">Thông tin</h3>
               <p className="text-gray-900 text-sm leading-relaxed font-normal">
-                Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ mỗi <strong className="font-bold">10 giây</strong>.
+                Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ <strong className="font-bold">10 giây</strong> một lần.
                 <br />
                 Đồng thời ghi nhận lại mỗi <strong className="font-bold">10 phút</strong> để phân tích và dự đoán.
               </p>
