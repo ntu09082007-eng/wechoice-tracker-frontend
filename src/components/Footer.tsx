@@ -69,7 +69,7 @@ export default function Footer() {
             {/* Cột 2 (Phải): Chữ ký - SỬA Ở ĐÂY: Đổi thành CĂN PHẢI (text-right) */}
             <div className="text-center md:text-right">
               <div className="font-cursive font-bold text-4xl md:text-5xl text-gray-900" style={{ fontFamily: '"Dancing Script", cursive', fontWeight: 700 }}>
-                Thank you dancer!
+                Thank you dancers!
               </div>
             </div>
 
