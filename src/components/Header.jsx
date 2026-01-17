@@ -7,7 +7,7 @@ export default function Header() {
 
   const navLinks = [
     { to: "/realtime", label: "Thống kê" },
-    { to: "/stats", label: "Lịch sử" },
+    { to: "/stats", label: "Dữ liệu" },
     { to: "/charts", label: "Biểu đồ" },
     { to: "/prediction", label: "Dự đoán" },
     { to: "/about", label: "Giới thiệu & Hướng dẫn" },
