@@ -93,7 +93,7 @@ setVoteChanges(changes); // Lưu thay đổi vào State
     <div className="px-4 xl:px-8 py-10 max-w-[98%] mx-auto">
       <div className="mb-10 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 pb-2">
-          Kết quả bình chọn chung cuộc
+          Kết quả bình chọn
         </h1>
         {isLoading && !updatedAt && !connectionError ? (
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-md flex-wrap justify-center">
