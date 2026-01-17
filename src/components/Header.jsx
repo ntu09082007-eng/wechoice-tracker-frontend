@@ -26,16 +26,17 @@ export default function Header() {
             </Link>
           </h1>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden xl:flex gap-4">
+        {/* Desktop Navigation - Đã chỉnh lại kích thước To và Rộng như cũ */}
+          <nav className="hidden xl:flex items-center gap-4"> 
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 ${
+                // Thay đổi: px-6 py-2.5 (cho to ra), bỏ text-sm (cho chữ lớn lại)
+                className={`px-6 py-2.5 rounded-full font-bold transition-all duration-200 whitespace-nowrap ${
                   location.pathname === link.to
-                    ? "bg-gray-900 text-white shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? 'bg-slate-900 text-white shadow-md'        // <-- MÀU ĐÃ OK
+                    : 'bg-transparent text-gray-500 hover:bg-gray-500 hover:text-white' // <-- MÀU ĐÃ OK
                 }`}
               >
                 {link.label}
