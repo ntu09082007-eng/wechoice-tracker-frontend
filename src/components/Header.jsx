@@ -19,11 +19,18 @@ export default function Header() {
         <div className="flex justify-between items-center">
           <h1 className="text-2xl md:text-3xl font-bold text-white">
             <Link
-              to="/realtime"
-              className="hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
-            >
-              <span>WeChoice 2025 Tracker</span>
-            </Link>
+  to="/realtime"
+  className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
+>
+  {/* Thêm ảnh logo vào đây */}
+  <img 
+    src="/wechoice.png" 
+    alt="Logo" 
+    className="w-8 h-8 md:w-10 md:h-10 object-contain" 
+  />
+  
+  <span>WeChoice 2025 Tracker</span>
+</Link>
           </h1>
 
         {/* Desktop Navigation - Đã chỉnh lại kích thước To và Rộng như cũ */}
