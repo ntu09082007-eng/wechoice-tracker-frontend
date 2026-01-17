@@ -26,19 +26,22 @@ export default function Header() {
             </Link>
           </h1>
 
-          {navLinks.map((link) => (
-  <Link
-    key={link.to}
-    to={link.to}
-    className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
-      location.pathname === link.to
-        ? 'bg-slate-900 text-white shadow-md'        // <-- ĐANG CHỌN: Nền xanh đen
-        : 'bg-transparent text-gray-500 hover:text-gray-900' // <-- KHÔNG CHỌN: Nền trong suốt
-    }`}
-  >
-    {link.label}
-  </Link>
-))}
+          {/* Desktop Navigation - Đã bọc lại bằng thẻ nav để gom nhóm */}
+          <nav className="hidden xl:flex items-center gap-1 md:gap-2"> 
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
+                  location.pathname === link.to
+                    ? 'bg-slate-900 text-white shadow-md'        // <-- ĐANG CHỌN: Nền xanh đen, chữ trắng
+                    : 'bg-transparent text-gray-500 hover:bg-gray-500 hover:text-white' // <-- HOVER: Nền xám, Chữ trắng
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
           {/* Mobile Menu Button */}
           <button
