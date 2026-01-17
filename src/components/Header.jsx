@@ -18,13 +18,21 @@ export default function Header() {
       <div className="w-full px-8 md:px-16 lg:px-24 py-5">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl md:text-3xl font-bold text-white">
-            <Link
+            <<Link
   to="/realtime"
-  className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
+  // Sửa 1: Giảm khoảng cách gap-3 xuống gap-2 trên điện thoại cho gọn
+  className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity duration-200 font-bold text-gray-900"
 >
-  {/* Thêm ảnh logo vào đây */}
-  <img src="/wechoice.png" alt="Logo" className="w-10 h-10 md:w-14 md:h-14 object-contain" />
-  <span>WeChoice 2025 Tracker</span>
+  <img 
+    src="/wechoice.png" 
+    alt="Logo" 
+    className="w-10 h-10 md:w-14 md:h-14 object-contain" 
+  />
+  
+  {/* Sửa 2: Thêm whitespace-nowrap (cấm xuống dòng) và chỉnh size chữ linh hoạt */}
+  <span className="text-lg sm:text-xl md:text-2xl tracking-tight whitespace-nowrap">
+    WeChoice 2025 Tracker
+  </span>
 </Link>
           </h1>
 
