@@ -58,7 +58,7 @@ export default function StatsPage() {
         <div className="px-4 md:px-8 py-10 max-w-[95%] mx-auto">
           <div className="mb-10 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-8">
-              Thống kê số liệu
+              Số liệu bình chọn
             </h1>
             <div className="flex justify-center">
               <CategorySelector onSelect={setCategoryId} />
