@@ -70,7 +70,7 @@ export default function AboutPage() {
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-2xl font-bold text-gray-800">
-              Tính năng: Cập nhật thời gian thực (Realtime)
+              Tính năng: Thống kê (Realtime)
             </h2>
           </div>
           <div className="space-y-3 text-gray-700">
@@ -110,7 +110,7 @@ export default function AboutPage() {
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-2xl font-bold text-gray-800">
-              Tính năng: Thống kê (Stats)
+              Tính năng: Dữ liệu (Stats)
             </h2>
           </div>
           <div className="space-y-3 text-gray-700">
@@ -141,12 +141,12 @@ export default function AboutPage() {
                 Có thể lọc bản ghi theo các tiêu chí:
                 <ul className="list-disc list-inside ml-6 mt-1">
                   <li>
-                    <b>Thời gian giữa hai bản ghi:</b> Ví dụ chỉ lấy các bản ghi
+                    <b>Thời gian giữa hai bản ghi:</b> VD: chỉ lấy các bản ghi
                     cách nhau 30 phút, 1 tiếng,... Mặc định (không lọc) là 10
                     phút.
                   </li>
                   <li>
-                    <b>Ngày bắt đầu lấy bản ghi:</b> Ví dụ chỉ lấy các bản ghi
+                    <b>Ngày bắt đầu lấy bản ghi:</b> VD: chỉ lấy các bản ghi
                     từ ngày 3/6/2025.
                   </li>
                 </ul>
@@ -300,8 +300,8 @@ export default function AboutPage() {
             <li className="flex items-start gap-2">
               <span className="font-bold">2.</span>
               <span>
-                <strong>Kết hợp các trang:</strong> Xem trang Cập nhật để biết
-                thứ hạng hiện tại, sau đó dùng trang Thống kê để phân tích xu
+                <strong>Kết hợp các trang:</strong> Xem trang Thống kê để biết
+                thứ hạng hiện tại, sau đó dùng trang Dữ liệu và Biểu đồ để phân tích xu
                 hướng, và trang Dự đoán để ước tính khả năng vượt lên.
               </span>
             </li>
@@ -317,7 +317,7 @@ export default function AboutPage() {
             <li className="flex items-start gap-2">
               <span className="font-bold">4.</span>
               <span>
-                <strong>So sánh nhiều ứng viên:</strong> Ở trang Thống kê, chọn
+                <strong>So sánh nhiều ứng viên:</strong> Ở trang Biểu đồ, chọn
                 nhiều ứng viên cùng lúc để dễ dàng so sánh xu hướng.
               </span>
             </li>
@@ -353,7 +353,7 @@ export default function AboutPage() {
               </h3>
               <p className="text-gray-700 ml-4">
                 A: Trang "Cập nhật" được cập nhật liên tục 10 giây một lần.
-                Các trang khác (Thống kê, Dự đoán) được cập nhật 10 phút một
+                Các trang khác (Dữ liệu, Biểu đồ, Dự đoán) được cập nhật 10 phút một
                 bản ghi vào cơ sở dữ liệu, bạn có thể lựa chọn lọc bản ghi nếu
                 muốn.
               </p>
@@ -365,7 +365,7 @@ export default function AboutPage() {
               <p className="text-gray-700 ml-4">
                 A: Dự đoán dựa trên xu hướng hiện tại và giả định rằng tốc độ
                 bình chọn sẽ giữ nguyên. Trong thực tế, tốc độ có thể thay đổi
-                do nhiều yếu tố.
+                do nhiều yếu tố khác nhau.
               </p>
             </div>
             <div>
@@ -373,7 +373,7 @@ export default function AboutPage() {
                 Q: Làm sao để xem chi tiết một ứng viên cụ thể?
               </h3>
               <p className="text-gray-700 ml-4">
-                A: Vào trang Thống kê hoặc Dự đoán, chọn hạng mục và ứng viên
+                A: Vào trang Biểu đồ hoặc Dự đoán, chọn hạng mục và ứng viên
                 muốn xem. Bạn sẽ thấy thông tin chi tiết về xu hướng bình chọn
                 của họ.
               </p>
