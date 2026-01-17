@@ -26,16 +26,16 @@ export default function Header() {
             </Link>
           </h1>
 
-          {/* Desktop Navigation - Đã bọc lại bằng thẻ nav để gom nhóm */}
-          <nav className="hidden xl:flex items-center gap-1 md:gap-2"> 
+          {/* Desktop Navigation */}
+          <nav className="hidden xl:flex gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 whitespace-nowrap ${
+                className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 ${
                   location.pathname === link.to
-                    ? 'bg-slate-900 text-white shadow-md'        // <-- ĐANG CHỌN: Nền xanh đen, chữ trắng
-                    : 'bg-transparent text-gray-500 hover:bg-gray-500 hover:text-white' // <-- HOVER: Nền xám, Chữ trắng
+                    ? "bg-gray-900 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 {link.label}
@@ -97,3 +97,5 @@ export default function Header() {
     </header>
   );
 }
+
+
