@@ -27,6 +27,7 @@ export default function Footer() {
                 </a>
               </p>
             </div>
+          </div>
 
           {/* Đường gạch ngang */}
           <div className="h-px bg-gray-300 w-full mb-8"></div>
@@ -56,3 +57,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+
