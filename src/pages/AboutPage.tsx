@@ -20,8 +20,8 @@ export default function AboutPage() {
           <p className="text-gray-700 leading-relaxed mb-2">
             WeChoice 2025 Tracker là công cụ theo dõi và phân tích kết quả bình
             chọn của giải thưởng WeChoice Awards 2025 theo thời gian thực. Đồng
-            thời cung cấp các tính năng thống kê, dự đoán và cập nhật trực tiếp
-            giúp bạn nắm bắt một cách trực quan về xu hướng bình chọn.
+            thời cung cấp các tính năng như thống kê, dự đoán và cập nhật trực tiếp
+            giúp bạn nắm bắt một cách trực quan hơn về xu hướng bình chọn.
           </p>
           <h3 className="text-lg font-extrabold hover:underline">
             <a href="https://wechoice.vn/" target="_blank" rel="noreferrer">
@@ -264,7 +264,7 @@ export default function AboutPage() {
                 trưởng
               </li>
               <li>
-                <strong>Có thể bắt kịp?:</strong> Đánh giá khả năng vượt lên dựa
+                <strong>Có thể bắt kịp:</strong> Đánh giá khả năng vượt lên dựa
                 trên tốc độ hiện tại
               </li>
               <li>
