@@ -28,16 +28,6 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="space-y-3 text-left">
-              <h3 className="text-xl font-extrabold text-gray-900">Thông tin</h3>
-              <p className="text-gray-900 text-sm leading-relaxed font-normal">
-                Dữ liệu được cập nhật trực tiếp từ hệ thống định kỳ <strong className="font-bold">10 giây</strong> một lần.
-                <br />
-                Đồng thời ghi nhận lại mỗi <strong className="font-bold">10 phút</strong> để phân tích và dự đoán.
-              </p>
-            </div>
-          </div>
-
           {/* Đường gạch ngang */}
           <div className="h-px bg-gray-300 w-full mb-8"></div>
 
@@ -46,7 +36,7 @@ export default function Footer() {
             
             {/* Copyright: SỬA LỖI DÍNH CHỮ VÀ DƯ KHOẢNG TRẮNG */}
             <div className="text-sm text-gray-900 space-y-1 text-center md:text-left">
-              <p className="font-bold">Copyright © by WeChoice Awards 2025 & công ty cổ phần VC CORP.</p>
+              <p className="font-bold">Copyright © by WeChoice Awards 2025 & Công ty cổ phần VCCorp.</p>
               <p className="font-normal">
                 Phát triển độc lập bởi người hâm mộ <a href="https://www.facebook.com/profile.php?id=100075664732643" target="_blank" rel="noreferrer" className="hover:underline hover:text-gray-700 transition-colors">Nghệ Sĩ LYHAN.</a>
               </p>
