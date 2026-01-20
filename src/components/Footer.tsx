@@ -35,11 +35,19 @@ export default function Footer() {
           {/* --- PHẦN DƯỚI --- */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             
-            {/* Copyright: SỬA LỖI DÍNH CHỮ VÀ DƯ KHOẢNG TRẮNG */}
+            {/* Copyright */}
             <div className="text-sm text-gray-900 space-y-1 text-center md:text-left">
               <p className="font-bold">Copyright © by WeChoice Awards 2025 & Công ty cổ phần VCCorp.</p>
               <p className="font-normal">
-                Phát triển độc lập bởi người hâm mộ <a href="https://www.facebook.com/profile.php?id=100075664732643" target="_blank" rel="noreferrer" className="hover:underline hover:text-gray-700 transition-colors">Nghệ Sĩ LYHAN.</a>
+                Phát triển độc lập bởi người hâm mộ{' '}
+                <a 
+                  href="https://www.facebook.com/profile.php?id=100075664732643" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="font-bold hover:underline hover:text-gray-700 transition-colors"
+                  >
+                  Nghệ Sĩ LYHAN.
+                </a>
               </p>
             </div>
 
